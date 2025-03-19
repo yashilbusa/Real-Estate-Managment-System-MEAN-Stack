@@ -1,7 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { User } from '../models/User.js';
-import { Admin } from '../models/Admin.js';
 import sendMail from '../controllers/sendMailController.js';
 
 

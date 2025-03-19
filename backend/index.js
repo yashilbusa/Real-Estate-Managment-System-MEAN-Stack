@@ -7,7 +7,6 @@ mongoose.set('debug',true);
 
 import User from "./models/User.js";
 import Property from "./models/Property.js";
-import Admin from "./models/Admin.js";
 
 dotenv.config();
 const app = express();
