@@ -1,18 +1,20 @@
 import mongoose from 'mongoose';
 
 const propertySchema = new mongoose.Schema({
-    propertyName: { type:String },
-    propertyImage:{ data: Buffer, type: String },
-    popertyDimension:{ 
-        squarefeet: { type: Number }
+    propertyName: { type:String, required: true },
+    propertyImage: { data: Buffer, type: String, required: true },
+    popertyDimension: { 
+        squarefeet: { type: Number, required: true }
     },
     location: { 
-        country:{ type:String },
+        country: { type:String },
         city: { type:String },
         area: { type:String }
     },
-    price:{ type:Number },
-    owner: { type:String }
+    price: { type:Number, required: true },
+    owner: { type:mongoose.Schema.Types.ObjectId, ref: "User", required: true }
 });
 
-export const Property = mongoose.model('Property', propertySchema);
+const Property = mongoose.model('Property', propertySchema);
+
+export default Property;

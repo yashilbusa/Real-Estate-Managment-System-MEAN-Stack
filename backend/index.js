@@ -5,6 +5,10 @@ import dotenv from 'dotenv';
 import bodyparser from 'body-parser';
 mongoose.set('debug',true);
 
+import User from "./models/User.js";
+import Property from "./models/Property.js";
+import Admin from "./models/Admin.js";
+
 dotenv.config();
 const app = express();
 const port = process.env.PORT;
