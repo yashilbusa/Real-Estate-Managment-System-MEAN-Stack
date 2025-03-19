@@ -34,7 +34,7 @@ export const signup = async (req, res) => {
         res.status(500).json({ error: "Server Error" });
     }
 };
-
+,
 // User Login
 export const login = async (req, res) => {
     try {
@@ -58,3 +58,4 @@ export const login = async (req, res) => {
         res.status(500).json({ error: "Server Error" });
     }
 };
+
