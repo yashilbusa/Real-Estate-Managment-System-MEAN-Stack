@@ -1,1 +1,97 @@
-<p>signup works!</p>
+<div class="center">
+    <div class="signup-box">
+      <h1 class="title">Sign Up</h1>
+  
+      <form #signupForm="ngForm" (ngSubmit)="signup()">
+        <div class="field">
+          <p class="control has-icons-left">
+            <input
+              [(ngModel)]="name"
+              name="name"
+              class="input has-background-light"
+              type="text"
+              placeholder="Name"
+              required
+              minlength="3"
+              #nameInput="ngModel"
+            />
+            <span class="icon is-small is-left">
+              <i class="fa fa-user" aria-hidden="true"></i>
+            </span>
+          </p>
+          <p class="help is-danger" *ngIf="nameInput.invalid && nameInput.touched">
+            Name must be at least 3 characters long.
+          </p>
+        </div>
+  
+        <div class="field">
+          <p class="control has-icons-left">
+            <input
+              [(ngModel)]="email"
+              name="email"
+              class="input has-background-light"
+              type="email"
+              placeholder="Email"
+              required
+              email 
+              #emailInput="ngModel"
+            />
+            <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+          </p>
+          <p class="help is-danger" *ngIf="emailInput.invalid && emailInput.touched">
+            Please enter a valid email.
+          </p>
+        </div>
+  
+        <div class="field">
+          <p class="control has-icons-left">
+            <input
+              [(ngModel)]="password"
+              name="password"
+              class="input has-background-light"
+              type="password"
+              placeholder="Password"
+              required
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+              #passwordInput="ngModel"
+            />
+            <span class="icon is-small is-left">
+              <i class="fas fa-lock"></i>
+            </span>
+          </p>
+          <p class="help is-danger" *ngIf="passwordInput.invalid && passwordInput.touched">
+            Password must be at least 8 characters long, include one uppercase letter, one lowercase letter, one number, and one special character.
+          </p>
+        </div>
+  
+        <div class="field">
+            <p class="control has-icons-left">
+                <select [(ngModel)]="role" name="role" class="input has-background-light" placeholder="Choose a Role:" required #roleInput="ngModel">
+                    <option value="buyer">buyer</option>
+                    <option value="seller">seller</option>
+                    <option value="agent">agent</option>
+                </select>
+
+                <span class="icon is-small is-left">
+                    <i class="fa-solid fa-check"></i>
+                </span>
+            </p>
+            <p class="help is-danger" *ngIf="roleInput.invalid && roleInput.touched">
+                Role Must be Required
+            </p>
+          </div>
+
+        <div class="field" style="display: flex; justify-content: flex-end;">
+          <p class="control">
+            <button class="button is-success has-text-white" [disabled]="signupForm.invalid">
+              Sign Up
+            </button>
+          </p>
+        </div>
+      </form>
+  
+      <p class="has-text-grey">Already have an account? <a routerLink="/login">Login</a> Here</p>
+    </div>
+  </div>
