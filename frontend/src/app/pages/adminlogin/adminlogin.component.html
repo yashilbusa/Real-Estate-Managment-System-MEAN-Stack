@@ -1,1 +1,58 @@
-<p>adminlogin works!</p>
+<div class="center">
+    <div class="login-box">
+      <h1 class="title">Admin Login</h1>
+  
+      <form #adminLoginForm="ngForm" (ngSubmit)="adminlogin()">
+        <div class="field">
+          <p class="control has-icons-left">
+            <input
+              [(ngModel)]="email"
+              name="email"
+              class="input has-background-light"
+              type="email"
+              placeholder="Email"
+              required
+              email
+              #emailInput="ngModel"
+            />
+            <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+          </p>
+          <p class="help is-danger" *ngIf="emailInput.invalid && emailInput.touched">
+            Please enter a valid email.
+          </p>
+        </div>
+  
+        <div class="field">
+          <p class="control has-icons-left">
+            <input
+              [(ngModel)]="password"
+              name="password"
+              class="input has-background-light"
+              type="password"
+              placeholder="Password"
+              required
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+              #passwordInput="ngModel"
+            />
+            <span class="icon is-small is-left">
+              <i class="fas fa-lock"></i>
+            </span>
+          </p>
+          <p class="help is-danger" *ngIf="passwordInput.invalid && passwordInput.touched">
+            Password must be at least 8 characters long, include one uppercase letter, one lowercase letter, one number, and one special character.
+          </p>
+        </div>
+  
+        <div class="field" style="display: flex; justify-content: flex-end;">
+          <p class="control">
+            <button class="button is-success has-text-white" [disabled]="adminLoginForm.invalid">
+              Login
+            </button>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+  
