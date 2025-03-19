@@ -59,28 +59,3 @@ export const login = async (req, res) => {
         res.status(500).json({ error: "Server Error" });
     }
 };
-
-// Admin Login
-export const adminLogin = async (req, res) => {
-    try {
-        const { email, password } = req.body;
-
-        if (!email || !password) {
-            return res.status(400).json({ error: "Email and password are required" });
-        }
-
-        const admin = await Admin.findOne({ email });
-        if (!admin || password !== admin.password) {
-            return res.status(400).json({ error: "Invalid credentials" });
-        }
-
-        const token = jwt.sign({ _id: admin._id }, process.env.JWT_SECRET_KEY, { expiresIn: "7d" });
-        admin.tokens.push({ token });
-        await admin.save();
-
-        res.status(200).json({ message: "Admin login successful", token });
-    } catch (error) {
-        res.status(500).json({ error: "Server Error" });
-    }
-};
-
