@@ -1,8 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { User } from '../models/User.js';
+import User from '../models/User.js';
 import sendMail from '../controllers/sendMailController.js';
-
 
 // User SignUp
 export const signup = async (req, res) => {
@@ -19,22 +18,28 @@ export const signup = async (req, res) => {
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        
-        try {
-            await sendMail(email, 'Registration Confirm!!!', `Your Role is: <b>${role}</b>`);
-        } catch (error) {
-            return res.status(500).json({ error: "Failed to send email" });
-        }
+        const newUser = new User({ name, email, password: hashedPassword, role, tokens: [] });
 
-        const newUser = new User({ name, email, password: hashedPassword, role });
+        // try {
+        //     await sendMail(email, 'Registration Confirm!!!', `Your Role is: <b>${role}</b>`);
+        // } catch (error) {
+        //     console.error("Email sending failed:", error);
+        //     return res.status(500).json({ error: "Failed to send email, but account is created." });
+        // }
+
         await newUser.save();
 
-        res.status(201).json({ message: "User registered Successfully."});
+        const token = jwt.sign({ userId: newUser._id, role: newUser.role }, process.env.JWT_SECRET_KEY, { expiresIn: "7d" });
+        newUser.tokens.push({ token });
+        await newUser.save();
+
+        res.status(201).json({ message: "User registered successfully.", token });
     } catch (error) {
-        res.status(500).json({ error: "Server Error" });
+        console.error("Signup error:", error);
+        res.status(500).json({ error: "Server error" });
     }
 };
-,
+
 // User Login
 export const login = async (req, res) => {
     try {

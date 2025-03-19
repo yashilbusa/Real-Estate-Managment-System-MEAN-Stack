@@ -12,22 +12,38 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  email: string = '';
-  password: string = '';
+  email = '';
+  password = '';
 
   constructor(private authService: AuthService, private router: Router) {}
+
   login() {
     this.authService.login(this.email, this.password).subscribe({
-      next: (res) => {
-        console.info("Login successful", res);
-        if (typeof window !== 'undefined' && res.token) {
-          localStorage.setItem('token', res.token); 
+      next: (res: any) => {
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('role', res.role);
+
+        const role = this.authService.getRole();
+
+        if (role === 'admin') {
+          this.router.navigate(['/admin-dashboard']);
+        } else if (role === 'buyer') {
+          this.router.navigate(['/buyer-dashboard']);
+        } else if (role === 'seller') {
+          this.router.navigate(['/seller-dashboard']);
+        } else if (role === 'agent') {
+          this.router.navigate(['/agent-dashboard']);
+        } else {
+          this.router.navigate(['/login']);
         }
-        this.router.navigate(['/']);
       },
       error: (err) => {
-        console.error("Login error:", err);
+        console.error('Login error:', err);
       }
     });
+  }
+  
+  logout() {
+    this.authService.logout();
   }
 }

@@ -28,9 +28,9 @@ export class SignupComponent {
     this.authService.signup(this.name, this.email, this.password, this.role).subscribe({
       next: (res) => {
         console.info("Signup successful", res);
-        if (typeof window !== 'undefined' && res.token) {
-          localStorage.setItem('token', res.token); 
-        }
+        // if (typeof window !== 'undefined' && res.token) {
+        //   localStorage.setItem('token', res.token); 
+        // }
       this.router.navigate(['/login']);
       },
       error: (err) => {
