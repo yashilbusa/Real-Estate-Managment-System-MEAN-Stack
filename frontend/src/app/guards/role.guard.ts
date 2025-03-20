@@ -13,7 +13,13 @@ export class RoleGuard implements CanActivate {
     const token = this.authService.getToken(0); 
     const role = localStorage.getItem('role');
 
-    if (!token && role !== 'buyer' && role !== 'seller' && role !== 'agent') {
+    if (!token && role !== 'buyer') {
+      return true;
+    }
+    else if(!token && role !== 'seller'){
+      return true;
+    }
+    else if(!token && role !== 'agent'){
       return true;
     }
     
