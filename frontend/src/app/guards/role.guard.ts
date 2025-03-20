@@ -28,6 +28,9 @@ export class RoleGuard implements CanActivate {
       this.router.navigate(['/login']); 
     }
 
+    this.authService.logout();
+    this.authService.adminlogout();
+
     return false;
   }
 }
