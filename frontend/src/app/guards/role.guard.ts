@@ -10,16 +10,10 @@ export class RoleGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router, private cookie:CookieService) {}
 
   canActivate(): boolean {
-    const token = this.authService.getToken(1); 
-    const role = localStorage.getItem('role') || this.cookie.get('token');
+    const token = this.authService.getToken(0); 
+    const role = localStorage.getItem('role');
 
-    if (token && role !== 'buyer') {
-      return true;
-    }
-    else if(token && role !== 'seller'){
-      return true;
-    }
-    else if(token && role !== 'agent'){
+    if (!token && role !== 'buyer' && role !== 'seller' && role !== 'agent') {
       return true;
     }
     
