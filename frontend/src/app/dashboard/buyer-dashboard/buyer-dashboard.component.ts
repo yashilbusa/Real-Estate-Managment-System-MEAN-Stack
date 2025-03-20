@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-buyer-dashboard',
@@ -8,5 +10,9 @@ import { Component } from '@angular/core';
   styleUrl: './buyer-dashboard.component.css'
 })
 export class BuyerDashboardComponent {
-
+  constructor(private authService: AuthService, private router: Router) {}
+  
+  logout() {
+    this.authService.logout();
+  }
 }

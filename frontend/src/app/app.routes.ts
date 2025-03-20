@@ -11,9 +11,9 @@ import { RoleGuard } from './guards/role.guard';
 export const routes: Routes = [
     { path: 'signup', component:SignupComponent},
     { path: 'login', component:LoginComponent},
-    { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard, RoleGuard] },
-    { path: 'buyer-dashboard', component: BuyerDashboardComponent, canActivate: [AuthGuard, RoleGuard] },
-    { path: 'seller-dashboard', component: SellerDashboardComponent, canActivate: [AuthGuard, RoleGuard] },
-    { path: 'agent-dashboard', component: AgentDashboardComponent, canActivate: [AuthGuard, RoleGuard] },
+    { path: 'admin-dashboard', component: AdminDashboardComponent},
+    { path: 'buyer-dashboard', component: BuyerDashboardComponent},
+    { path: 'seller-dashboard', component: SellerDashboardComponent},
+    { path: 'agent-dashboard', component: AgentDashboardComponent},
     { path: '**', redirectTo:'signup', pathMatch:'full'}
 ];

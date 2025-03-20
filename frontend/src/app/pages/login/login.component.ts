@@ -25,6 +25,7 @@ export class LoginComponent {
           localStorage.setItem('token', res.token);
           localStorage.setItem('role', res.role);
         }
+        
         const role = this.authService.getRole();
 
         if (role === 'admin') {
@@ -43,9 +44,5 @@ export class LoginComponent {
         console.error('Login error:', err);
       }
     });
-  }
-  
-  logout() {
-    this.authService.logout();
   }
 }
