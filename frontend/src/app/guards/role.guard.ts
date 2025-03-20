@@ -1,30 +1,32 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class RoleGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router, private cookie:CookieService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(): boolean {
-    const token = this.authService.getToken(0); 
-    const role = localStorage.getItem('role');
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    const token = this.authService.getToken(1) || this.authService.getToken(0);
+    const role = localStorage.getItem('role'); 
+    const currentPath = state.url;
 
-    if (token && role !== 'buyer') {
-      return true;
+    if (!token || !role) {
+      this.router.navigate(['/login']);
+      return false;
     }
-    else if(token && role !== 'seller'){
+
+    if (role === 'buyer' && currentPath === '/buyer-dashboard') {
       return true;
-    }
-    else if(token && role !== 'agent'){
+    } else if (role === 'seller' && currentPath === '/seller-dashboard') {
       return true;
+    } else if (role === 'agent' && currentPath === '/agent-dashboard') {
+      return true;
+    } else {
+      this.router.navigate(['/login']); 
     }
-    
-    this.authService.logout();  
-    this.authService.adminlogout();  
 
     return false;
   }
