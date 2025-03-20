@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -15,34 +16,43 @@ export class LoginComponent {
   email = '';
   password = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router,private cookie:CookieService) {}
 
   login() {
     this.authService.login(this.email, this.password).subscribe({
       next: (res: any) => {
         
-        if (typeof window !== 'undefined') {
-          localStorage.setItem('token', res.token);
-          localStorage.setItem('role', res.role);
+        if(typeof window !== 'undefined' && res.token && res.role){
+            if (res.role !== 'admin') {
+              localStorage.setItem('token', res.token);
+              localStorage.setItem('role', res.role);
+            }
+            else{
+              this.cookie.set('token',res.token,{ expires: 1 });
+              this.cookie.set('role',res.role,{ expires: 1 });
+            }
         }
-        
-        const role = this.authService.getRole();
-
-        if (role === 'admin') {
-          this.router.navigate(['/admin-dashboard']);
-        } else if (role === 'buyer') {
-          this.router.navigate(['/buyer-dashboard']);
-        } else if (role === 'seller') {
-          this.router.navigate(['/seller-dashboard']);
-        } else if (role === 'agent') {
-          this.router.navigate(['/agent-dashboard']);
-        } else {
-          this.router.navigate(['/login']);
-        }
+        this.navigateToDashboard(res.role);
       },
       error: (err) => {
         console.error('Login error:', err);
       }
     });
   }
+
+  navigateToDashboard(role:string){
+    if (role === 'admin') {
+      console.log("admin dashboard");
+      this.router.navigate(['/admin-dashboard']);
+    } else if (role === 'buyer') {
+      this.router.navigate(['/buyer-dashboard']);
+    } else if (role === 'seller') {
+      this.router.navigate(['/seller-dashboard']);
+    } else if (role === 'agent') {
+      this.router.navigate(['/agent-dashboard']);
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
+
 }

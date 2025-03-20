@@ -19,7 +19,7 @@ export class AuthService {
   login(email: string, password: string) {
     return this.http.post<{ token: string; role: string }>(`${this.apiUrl}/login`, { email, password });
   }  
-
+  
   logout() {
     if (typeof window !== 'undefined') {
       localStorage.removeItem('token');
@@ -30,9 +30,5 @@ export class AuthService {
     setTimeout(() => {
       this.router.navigate(['/login']);
     }, 1000);
-  }
-
-  getRole() {
-    return localStorage.getItem('role');
   }
 }
