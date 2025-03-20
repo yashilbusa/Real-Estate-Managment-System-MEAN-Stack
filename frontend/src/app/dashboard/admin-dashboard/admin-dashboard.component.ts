@@ -15,14 +15,7 @@ import { FormsModule } from '@angular/forms';
 export class AdminDashboardComponent {
   constructor(private authService: AuthService, private router: Router, private cookie:CookieService) {}
 
-  adminlogout(){
-    if (typeof window !== 'undefined') {
-      this.cookie.deleteAll();
-    }
-    console.info("Log Out Successfully");
-    
-    setTimeout(() => {
-      this.router.navigate(['/login']);
-    }, 1000);
+  adminlogout() {
+    this.authService.adminlogout();
   }
 }

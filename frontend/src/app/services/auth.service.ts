@@ -35,6 +35,17 @@ export class AuthService {
     }, 1000);
   }
 
+  adminlogout(){
+    if (typeof window !== 'undefined') {
+      this.cookie.deleteAll();
+    }
+    console.info("Log Out Successfully");
+    
+    setTimeout(() => {
+      this.router.navigate(['/login']);
+    }, 1000);
+  }
+  
   getToken(flag:number):any {
     if(flag == 1){
         if (typeof window !== "undefined") {

@@ -17,7 +17,7 @@ export class Adminguard implements CanActivate {
     if (token && role !== 'admin') {
       return true;
     }
-    
+
     if (typeof window !== "undefined") {
       alert("You Have Not Logged In");
     }
