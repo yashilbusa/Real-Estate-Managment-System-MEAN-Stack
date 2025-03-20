@@ -13,9 +13,9 @@ import { RedirectGuard } from './guards/redirect.guard';
 export const routes: Routes = [
     { path: 'signup', component:SignupComponent},
     { path: 'login', component:LoginComponent},
-    { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [Adminguard,RedirectGuard] },
-    { path: 'buyer-dashboard', component: BuyerDashboardComponent, canActivate: [AuthGuard,RoleGuard,RedirectGuard], data: { role: 'buyer' } },
-    { path: 'seller-dashboard', component: SellerDashboardComponent, canActivate: [AuthGuard,RoleGuard,RedirectGuard], data: { role: 'seller' } },
-    { path: 'agent-dashboard', component: AgentDashboardComponent, canActivate: [AuthGuard,RoleGuard,RedirectGuard], data: { role: 'agent' } },
+    { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [Adminguard,RoleGuard] },
+    { path: 'buyer-dashboard', component: BuyerDashboardComponent, canActivate: [AuthGuard] },
+    { path: 'seller-dashboard', component: SellerDashboardComponent, canActivate: [AuthGuard] },
+    { path: 'agent-dashboard', component: AgentDashboardComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo:'signup', pathMatch:'full'}
 ];

@@ -11,7 +11,7 @@ export class RedirectGuard implements CanActivate {
   canActivate(): boolean {
     const token = this.authService.getToken(1) || this.authService.getToken(0); 
 
-    if (token) {
+    if (!token) {
       alert('You must first log out before accessing this page.');
       this.authService.logout();
       return false; 

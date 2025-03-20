@@ -11,10 +11,10 @@ export class RoleGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot): boolean {
     const token = this.authService.getToken(1); 
     const role = localStorage.getItem('role');
-    const requiredRole = route.data['role']; 
 
-    if (token && role === requiredRole) {
-      return true;
+    if (token && role !== 'admin') {
+        this.authService.logout();
+        return true;
     }
 
     this.router.navigate(['/login']);
