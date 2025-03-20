@@ -6,6 +6,7 @@ import { AgentDashboardComponent } from './dashboard/agent-dashboard/agent-dashb
 import { BuyerDashboardComponent } from './dashboard/buyer-dashboard/buyer-dashboard.component';
 import { SellerDashboardComponent } from './dashboard/seller-dashboard/seller-dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
+import { Adminguard } from './guards/admin.guard';
 
 export const routes: Routes = [
     { path: 'signup', component:SignupComponent},
