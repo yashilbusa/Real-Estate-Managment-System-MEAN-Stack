@@ -32,10 +32,6 @@ export class AuthService {
     }, 1000);
   }
 
-  isAuthenticated() {
-    return !!localStorage.getItem('token');
-  }
-
   getRole() {
     return localStorage.getItem('role');
   }
