@@ -21,8 +21,10 @@ export class LoginComponent {
     this.authService.login(this.email, this.password).subscribe({
       next: (res: any) => {
         
-        localStorage.setItem('token', res.token);
-        localStorage.setItem('role', res.role);
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('token', res.token);
+          localStorage.setItem('role', res.role);
+        }
         const role = this.authService.getRole();
 
         if (role === 'admin') {
