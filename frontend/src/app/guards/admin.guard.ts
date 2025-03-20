@@ -12,7 +12,11 @@ export class Adminguard implements CanActivate {
 
   canActivate(): boolean {
     const token = this.authService.getToken(0);
-    const role = localStorage.getItem('role');
+    let role: string | null = null;
+
+    if (typeof window !== 'undefined') {
+      role = localStorage.getItem('role');
+    }
 
     if (token && role !== 'admin') {
       return true;
