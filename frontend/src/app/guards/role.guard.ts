@@ -14,6 +14,8 @@ export class RoleGuard implements CanActivate {
     const currentPath = state.url;
 
     if (!token || !role) {
+      this.authService.logout(); 
+      this.authService.adminlogout();
       this.router.navigate(['/login']);
       return false;
     }
@@ -24,13 +26,11 @@ export class RoleGuard implements CanActivate {
       return true;
     } else if (role === 'agent' && currentPath === '/agent-dashboard') {
       return true;
-    } else {
-      this.router.navigate(['/login']); 
     }
 
     this.authService.logout();
     this.authService.adminlogout();
-
+    this.router.navigate(['/login']);
     return false;
   }
 }
