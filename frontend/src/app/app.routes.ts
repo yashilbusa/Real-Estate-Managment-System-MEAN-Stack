@@ -7,13 +7,14 @@ import { BuyerDashboardComponent } from './dashboard/buyer-dashboard/buyer-dashb
 import { SellerDashboardComponent } from './dashboard/seller-dashboard/seller-dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
 import { Adminguard } from './guards/admin.guard';
+import { RoleGuard } from './guards/role.guard';
 
 export const routes: Routes = [
     { path: 'signup', component:SignupComponent},
     { path: 'login', component:LoginComponent},
     { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [Adminguard] },
-    { path: 'buyer-dashboard', component: BuyerDashboardComponent, canActivate: [AuthGuard], data: { role: 'buyer' } },
-    { path: 'seller-dashboard', component: SellerDashboardComponent, canActivate: [AuthGuard], data: { role: 'seller' } },
-    { path: 'agent-dashboard', component: AgentDashboardComponent, canActivate: [AuthGuard], data: { role: 'agent' } },
+    { path: 'buyer-dashboard', component: BuyerDashboardComponent, canActivate: [AuthGuard,RoleGuard], data: { role: 'buyer' } },
+    { path: 'seller-dashboard', component: SellerDashboardComponent, canActivate: [AuthGuard,RoleGuard], data: { role: 'seller' } },
+    { path: 'agent-dashboard', component: AgentDashboardComponent, canActivate: [AuthGuard,RoleGuard], data: { role: 'agent' } },
     { path: '**', redirectTo:'signup', pathMatch:'full'}
 ];
