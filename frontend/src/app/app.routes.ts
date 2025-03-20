@@ -11,9 +11,9 @@ import { Adminguard } from './guards/admin.guard';
 export const routes: Routes = [
     { path: 'signup', component:SignupComponent},
     { path: 'login', component:LoginComponent},
-    { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard] },
-    { path: 'buyer-dashboard', component: BuyerDashboardComponent, canActivate: [AuthGuard] },
-    { path: 'seller-dashboard', component: SellerDashboardComponent, canActivate: [AuthGuard] },
-    { path: 'agent-dashboard', component: AgentDashboardComponent, canActivate: [AuthGuard] },
+    { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [Adminguard] },
+    { path: 'buyer-dashboard', component: BuyerDashboardComponent, canActivate: [AuthGuard], data: { role: 'buyer' } },
+    { path: 'seller-dashboard', component: SellerDashboardComponent, canActivate: [AuthGuard], data: { role: 'seller' } },
+    { path: 'agent-dashboard', component: AgentDashboardComponent, canActivate: [AuthGuard], data: { role: 'agent' } },
     { path: '**', redirectTo:'signup', pathMatch:'full'}
 ];

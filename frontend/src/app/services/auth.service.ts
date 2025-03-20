@@ -47,11 +47,4 @@ export class AuthService {
     }
   }
 
-  isAuthenticatedUser(){
-    return !!this.getToken(1);
-  }
-
-  isAuthenticatedAdmin(){
-    return !!this.getToken(0);
-  }
 }
