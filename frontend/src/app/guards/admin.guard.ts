@@ -14,6 +14,9 @@ export class Adminguard implements CanActivate {
     if (token) {
       return true;
     }
+    if (typeof window !== "undefined") {
+      alert("You Have Not Logged In");
+    }
     this.router.navigate(['/login']);
     return false;
   }
