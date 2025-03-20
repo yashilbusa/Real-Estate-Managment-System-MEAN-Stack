@@ -18,7 +18,7 @@ export const signup = async (req, res) => {
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = new User({ name, email, password: hashedPassword, role, tokens: [] });
+        const newUser = new User({ name, email, password: hashedPassword, role });
 
         // try {
         //     await sendMail(email, 'Registration Confirm!!!', `Your Role is: <b>${role}</b>`);
@@ -29,11 +29,7 @@ export const signup = async (req, res) => {
 
         await newUser.save();
 
-        const token = jwt.sign({ userId: newUser._id, role: newUser.role }, process.env.JWT_SECRET_KEY, { expiresIn: "7d" });
-        newUser.tokens.push({ token });
-        await newUser.save();
-
-        res.status(201).json({ message: "User registered successfully.", token });
+        res.status(201).json({ message: "User registered successfully."});
     } catch (error) {
         console.error("Signup error:", error);
         res.status(500).json({ error: "Server error" });
@@ -54,11 +50,11 @@ export const login = async (req, res) => {
             return res.status(400).json({ error: "Invalid credentials" });
         }
 
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: "7d" });
+        const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET_KEY, { expiresIn: "7d" });
         user.tokens.push({ token });
         await user.save();
 
-        res.status(200).json({ message: "Login successful", token });
+        res.status(200).json({ message: "Login successful", token, role: user.role });
     } catch (error) {
         res.status(500).json({ error: "Server Error" });
     }

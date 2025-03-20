@@ -8,6 +8,8 @@ mongoose.set('debug',true);
 import User from "./models/User.js";
 import Property from "./models/Property.js";
 
+import authRoutes from './routes/authRoutes.js';
+
 dotenv.config();
 const app = express();
 const port = process.env.PORT;
@@ -19,6 +21,10 @@ app.use(bodyparser.json());
 mongoose.connect(process.env.MONGO_URL)
     .then(() => console.info('Connected to MongoDB'))
     .catch(err => console.error('Error Connecting to MongoDB', err));
+
+
+app.use("/", authRoutes);
+
 
 app.listen(port, () => {
     console.info(`Server Running on http://localhost:${port}`);
