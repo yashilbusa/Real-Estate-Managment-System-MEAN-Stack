@@ -13,7 +13,7 @@ import { RedirectGuard } from './guards/redirect.guard';
 export const routes: Routes = [
     { path: 'signup', component:SignupComponent},
     { path: 'login', component:LoginComponent},
-    { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [Adminguard,RoleGuard] },
+    { path: 'admin-dashboard', component: AdminDashboardComponent},
     { path: 'buyer-dashboard', component: BuyerDashboardComponent, canActivate: [AuthGuard] },
     { path: 'seller-dashboard', component: SellerDashboardComponent, canActivate: [AuthGuard] },
     { path: 'agent-dashboard', component: AgentDashboardComponent, canActivate: [AuthGuard] },

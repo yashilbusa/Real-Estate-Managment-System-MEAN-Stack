@@ -12,6 +12,7 @@ export class Adminguard implements CanActivate {
   canActivate(): boolean {
     const token = this.authService.getToken(0);
     if (token) {
+      this.authService.logout();
       return true;
     }
     if (typeof window !== "undefined") {
