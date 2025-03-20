@@ -19,7 +19,7 @@ export class AdminDashboardComponent {
     if (typeof window !== 'undefined') {
       this.cookie.deleteAll();
     }
-    console.log("Log Out Successfully");
+    console.info("Log Out Successfully");
     
     setTimeout(() => {
       this.router.navigate(['/login']);

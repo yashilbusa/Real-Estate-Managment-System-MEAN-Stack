@@ -28,7 +28,7 @@ export class AuthService {
       localStorage.removeItem('token');
       localStorage.removeItem('role');
     }
-    console.log("Log Out Successfully");
+    console.info("Log Out Successfully");
     
     setTimeout(() => {
       this.router.navigate(['/login']);

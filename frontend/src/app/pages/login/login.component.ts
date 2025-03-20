@@ -42,7 +42,7 @@ export class LoginComponent {
 
   navigateToDashboard(role:string){
     if (role === 'admin') {
-      console.log("admin dashboard");
+      console.info("admin dashboard");
       this.router.navigate(['/admin-dashboard']);
     } else if (role === 'buyer') {
       this.router.navigate(['/buyer-dashboard']);
