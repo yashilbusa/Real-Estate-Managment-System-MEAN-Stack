@@ -23,7 +23,7 @@ export class Adminguard implements CanActivate {
     }
 
     if (typeof window !== "undefined") {
-      alert("You Have No Permission To Admin LogIn");
+      alert("You Have No Permission To Admin Login, You Have Been Logged Out !!!");
     }
 
     this.authService.logout();
