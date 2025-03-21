@@ -5,9 +5,6 @@ import dotenv from 'dotenv';
 import bodyparser from 'body-parser';
 mongoose.set('debug',true);
 
-import User from "./models/User.js";
-import Property from "./models/Property.js";
-
 import authRoutes from './routes/authRoutes.js';
 import propertyRoutes from './routes/propertyRoutes.js';
 

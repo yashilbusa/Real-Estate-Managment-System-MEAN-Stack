@@ -4,14 +4,14 @@ import Property from '../models/Property.js';
 
 const listProperty = async (req, res) => {
     try {
-        const { propertyName, propertyImage, popertyDimension, location, price} = req.body;
+        const { propertyName, propertyImage, popertyDimension, location, price, owner} = req.body;
         const property = new Property({ 
             propertyName, 
             propertyImage, 
             popertyDimension, 
             location, 
             price, 
-            owner: req.user._id 
+            owner
         });
         await property.save();
         res.status(201).json(property);

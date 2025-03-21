@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { User } from '../models/User.js';
+import User from '../models/User.js';
 
 const userMiddleware = async (req, res, next) => {
     try {
@@ -7,7 +7,7 @@ const userMiddleware = async (req, res, next) => {
         if (!token) throw new Error('No token provided');
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-        const user = await User.findOne({ _id: decoded.userId, 'tokens.token': token });
+        const user = await User.findOne({ _id: decoded.owner, 'tokens.token': token });
 
         if (!user) throw new Error('Authentication failed');
 
