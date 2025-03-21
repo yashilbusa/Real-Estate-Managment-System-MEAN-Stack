@@ -9,6 +9,7 @@ import User from "./models/User.js";
 import Property from "./models/Property.js";
 
 import authRoutes from './routes/authRoutes.js';
+import propertyRoutes from './routes/propertyRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -24,6 +25,7 @@ mongoose.connect(process.env.MONGO_URL)
 
 
 app.use("/", authRoutes);
+app.use("/", propertyRoutes);
 
 
 app.listen(port, () => {
