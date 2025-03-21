@@ -15,10 +15,10 @@ export class SellerDashboardComponent {
   
   constructor(private authService: AuthService, private router: Router) {}
   
-  property: any = {
+    property: any = {
     propertyName: '',
     squarefeet: null,
-    country: '',
+    country: 'India',
     city: '',
     area: '',
     price: null
@@ -26,7 +26,6 @@ export class SellerDashboardComponent {
 
   imageError: string | null = null;
   selectedFile: File | null = null;
-
 
   logout() {
     console.log('Logout clicked'); 
