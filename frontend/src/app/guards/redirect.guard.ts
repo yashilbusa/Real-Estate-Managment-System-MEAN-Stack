@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RedirectGuard implements CanActivate {
 
-  constructor(private router: Router, private authService:AuthService) {}
+  constructor(private router: Router, private authService:AuthService, private cookie:CookieService) {}
 
   canActivate(): boolean {
     let token: string | null = null;
@@ -15,7 +16,7 @@ export class RedirectGuard implements CanActivate {
 
     if (typeof window !== 'undefined') {
       token = this.authService.getToken(1) || this.authService.getToken(0);
-      role = localStorage.getItem('role');
+      role = localStorage.getItem('role') || this.cookie.get('role');
     }
 
     if (token && role) {
