@@ -19,6 +19,7 @@ export class SellerDashboardComponent {
     propertyName: '',
     squarefeet: null,
     country: 'India',
+    state: '',
     city: '',
     area: '',
     price: null
