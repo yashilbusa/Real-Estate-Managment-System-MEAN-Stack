@@ -1,2 +1,63 @@
 <p>seller-dashboard works!</p>
-  <button (click)="logout()">Logout</button>
+<button (click)="logout()">Logout</button>
+
+<div class="container">
+  <h2>Create Property Listing</h2>
+  <form #listingForm="ngForm" (ngSubmit)="uploadProperty()">
+    
+    <!-- Property Name -->
+    <div class="form-group">
+      <label for="propertyName">Property Name *</label>
+      <input type="text" id="propertyName" name="propertyName" [(ngModel)]="property.propertyName" class="form-control" required>
+      <div *ngIf="!property.propertyName && listingForm.submitted" class="error">
+        Property name is required.
+      </div>
+    </div>
+
+    <!-- Property Image -->
+    <div class="form-group">
+      <label for="propertyImage">Upload Property Image *</label>
+      <input type="file" id="propertyImage" (change)="onFileSelected($event)" class="form-control" required>
+      <div *ngIf="imageError" class="error">
+        Please upload a valid image.
+      </div>
+    </div>
+
+    <!-- Property Dimension -->
+    <div class="form-group">
+      <label for="squarefeet">Property Dimension (sq ft) *</label>
+      <input type="number" id="squarefeet" name="squarefeet" [(ngModel)]="property.squarefeet" class="form-control" required>
+      <div *ngIf="!property.squarefeet && listingForm.submitted" class="error">
+        Square feet is required and must be a number.
+      </div>
+    </div>
+
+    <!-- Location -->
+    <div class="form-group">
+      <label for="country">Country</label>
+      <input type="text" id="country" name="country" [(ngModel)]="property.country" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="city">City</label>
+      <input type="text" id="city" name="city" [(ngModel)]="property.city" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="area">Area</label>
+      <input type="text" id="area" name="area" [(ngModel)]="property.area" class="form-control">
+    </div>
+
+    <!-- Price -->
+    <div class="form-group">
+      <label for="price">Price *</label>
+      <input type="number" id="price" name="price" [(ngModel)]="property.price" class="form-control" required>
+      <div *ngIf="!property.price && listingForm.submitted" class="error">
+        Price is required and must be a number.
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary">Create Listing</button>
+  </form>
+</div>
