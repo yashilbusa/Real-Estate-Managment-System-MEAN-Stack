@@ -29,6 +29,7 @@ export class SellerDashboardComponent {
   selectedFile: File | null = null;
 
   logout() {
+    this.authService.logout();
     console.log('Logout clicked'); 
   }
 
