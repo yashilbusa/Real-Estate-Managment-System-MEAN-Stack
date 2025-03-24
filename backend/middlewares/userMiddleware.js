@@ -7,11 +7,12 @@ const userMiddleware = async (req, res, next) => {
         if (!token) throw new Error('No token provided');
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-        const user = await User.findOne({ _id: decoded.user});
+        const user = await User.findOne({ _id: decoded.ownerId, name: decoded.ownerName, role: decoded.role});
 
         if (!user) throw new Error('Authentication failed');
 
         req.user = user;
+        req.token = token;
         next();
     } catch (error) {
         res.status(401).send({ error: 'Please authenticate' });
@@ -19,3 +20,4 @@ const userMiddleware = async (req, res, next) => {
 };
 
 export default userMiddleware;
+
