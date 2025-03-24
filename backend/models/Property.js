@@ -10,10 +10,12 @@ const propertySchema = new mongoose.Schema({
         country: { type:String },
         state: { type: String },
         city: { type:String },
-        area: { type:String }
     },
     price: { type:Number, required: true },
-    owner: { type:mongoose.Schema.Types.ObjectId, ref: "User", required: true }
+    owner: { 
+        ownerId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+        ownerName: { type: String, required: true }
+    }
 });
 
 const Property = mongoose.model('Property', propertySchema);

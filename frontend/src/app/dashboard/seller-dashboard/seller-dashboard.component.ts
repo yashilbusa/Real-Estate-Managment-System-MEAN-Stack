@@ -3,37 +3,40 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-seller-dashboard',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './seller-dashboard.component.html',
   styleUrl: './seller-dashboard.component.css'
 })
 export class SellerDashboardComponent {
-  
-  constructor(private authService: AuthService, private router: Router) {}
-  
-    property: any = {
+  property: any = {
     propertyName: '',
     squarefeet: null,
     country: 'India',
     state: '',
     city: '',
-    area: '',
     price: null
   };
 
   imageError: string | null = null;
   selectedFile: File | null = null;
+  states: string[] = [];
+  cities: string[] = [];
+
+  constructor(private authService: AuthService, private router: Router, private http: HttpClient) {
+    this.fetchStates();
+  }
 
   logout() {
     this.authService.logout();
-    console.log('Logout clicked'); 
+    console.log('Logout clicked');
   }
 
-  onFileSelected(event: any) {
+  fileSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
       const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
@@ -47,21 +50,30 @@ export class SellerDashboardComponent {
     }
   }
 
+  fetchStates() {
+    this.http.get<any>('https://api.countrystatecity.in/v1/countries/IN/states', {
+      headers: { 'X-CSCAPI-KEY': 'YOUR_API_KEY' }
+    }).subscribe(
+      response => this.states = response.map((state: any) => state.name),
+      error => console.error('Error fetching states:', error)
+    );
+  }
+
+  fetchCities() {
+    if (this.property.state) {
+      this.http.get<any>(`https://api.countrystatecity.in/v1/countries/IN/states/${this.property.state}/cities`, {
+        headers: { 'X-CSCAPI-KEY': 'YOUR_API_KEY' }
+      }).subscribe(
+        response => this.cities = response.map((city: any) => city.name),
+        error => console.error('Error fetching cities:', error)
+      );
+    }
+  }
+
   uploadProperty(): void {
     if (!this.property.propertyName || !this.property.squarefeet || !this.property.price || !this.selectedFile) {
       this.imageError = 'Please fill in all required fields and upload an image.';
       return;
     }
-
-    const formData = new FormData();
-    formData.append('propertyName', this.property.propertyName);
-    formData.append('squarefeet', this.property.squarefeet);
-    formData.append('country', this.property.country);
-    formData.append('city', this.property.city);
-    formData.append('area', this.property.area);
-    formData.append('price', this.property.price);
-    formData.append('propertyImage', this.selectedFile);
-
-    console.log('Form Data Submitted:', formData);
   }
 }
