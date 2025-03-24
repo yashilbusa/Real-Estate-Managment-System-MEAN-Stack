@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-seller-dashboard',
@@ -52,7 +53,7 @@ export class SellerDashboardComponent {
 
   fetchStates() {
     this.http.get<any>('https://api.countrystatecity.in/v1/countries/IN/states', {
-      headers: { 'X-CSCAPI-KEY': 'YOUR_API_KEY' }
+      headers: { 'X-CSCAPI-KEY': 'NHhvOEcyWk50N2Vna3VFTE00bFp3MjFKR0ZEOUhkZlg4RTk1MlJlaA==' }
     }).subscribe(
       response => this.states = response.map((state: any) => state.name),
       error => console.error('Error fetching states:', error)
@@ -62,7 +63,7 @@ export class SellerDashboardComponent {
   fetchCities() {
     if (this.property.state) {
       this.http.get<any>(`https://api.countrystatecity.in/v1/countries/IN/states/${this.property.state}/cities`, {
-        headers: { 'X-CSCAPI-KEY': 'YOUR_API_KEY' }
+        headers: { 'X-CSCAPI-KEY': 'NHhvOEcyWk50N2Vna3VFTE00bFp3MjFKR0ZEOUhkZlg4RTk1MlJlaA==' }
       }).subscribe(
         response => this.cities = response.map((city: any) => city.name),
         error => console.error('Error fetching cities:', error)
