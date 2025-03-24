@@ -1,5 +1,5 @@
 import express from 'express';
-import { listProperty, updateProperty } from '../controllers/propertyContorller.js';
+import { listProperty, updateProperty, deleteProperty } from '../controllers/propertyContorller.js';
 import multer from 'multer';
 import userMiddleware  from '../middlewares/userMiddleware.js';
 
@@ -11,6 +11,7 @@ const router = express.Router();
 
 router.post("/listNewProperty", listProperty);
 router.put('/updateProperty/:propertyId', updateProperty);
+router.delete('/deleteProperty/:propertyId',deleteProperty);
 
 
 export default router;

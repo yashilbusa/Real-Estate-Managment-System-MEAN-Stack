@@ -28,6 +28,7 @@ export const listProperty = async (req,res) => {
 // Update Existing Property
 export const updateProperty = async (req, res) => {
     try {
+        const { propertyId } = req.params;
         const { propertyName, squarefeet, country, state, city, price } = req.body;
 
         if (!propertyId) {
@@ -40,26 +41,37 @@ export const updateProperty = async (req, res) => {
         if (squarefeet) updatedFields.popertyDimension = { squarefeet };
         if (country || state || city) {
             updatedFields.location = {
-                country: country || undefined,
-                state: state || undefined,
-                city: city || undefined,
+                country: country,
+                state: state,
+                city: city,
             };
         }
         if (price) updatedFields.price = price;
 
-        const updatedProperty = await Property.findByIdAndUpdate(
-            req.params.id,
+        const updatedProperty = await Property.updateOne(
+            { _id: propertyId },
             { $set: updatedFields },
             { new: true }
         );
 
-        updatedProperty.save();
-        if (!updatedProperty) {
-            return res.status(404).json({ message: 'Property not found' });
-        }
-
-        res.status(200).json({ message: 'Property updated successfully', property: updatedProperty });
+        res.status(200).json({ message: 'Property updated successfully', UpdatedProperty: updatedProperty });
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });
     }
 };
+
+// Delete Property
+export const deleteProperty = async (req,res) => {
+    try{
+        const { propertyId } = req.params;
+
+        if (!propertyId) {
+            return res.status(400).json({ message: 'Property ID is required' });
+        }
+
+        await Property.deleteOne({ _id: propertyId});
+        res.status(200).json({ message: 'Property Deleted successfully'});
+    } catch (error){
+        res.status(500).json({ message: 'Server error', error: error.message });  
+    }
+}
