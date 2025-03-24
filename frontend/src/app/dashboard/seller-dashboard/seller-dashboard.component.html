@@ -38,7 +38,7 @@
       <label for="state">State *</label>
       <select id="state" name="state" [(ngModel)]="property.state" (change)="fetchStates()" class="form-control" required>
         <option value="" disabled selected>Select State</option>
-        <option *ngFor="let state of states" [value]="state">{{ state }}</option>
+        <option *ngFor="let state of states" [value]="state">{{ state.name }}</option>
       </select>
     </div>
 

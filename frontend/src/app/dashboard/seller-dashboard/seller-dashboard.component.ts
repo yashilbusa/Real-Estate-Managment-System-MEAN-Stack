@@ -25,7 +25,7 @@ export class SellerDashboardComponent {
 
   imageError: string | null = null;
   selectedFile: File | null = null;
-  states: string[] = [];
+  states: { name: string; iso2: string }[] = []; 
   cities: string[] = [];
 
   constructor(private authService: AuthService, private router: Router, private http: HttpClient) {
@@ -53,17 +53,17 @@ export class SellerDashboardComponent {
 
   fetchStates() {
     this.http.get<any>('https://api.countrystatecity.in/v1/countries/IN/states', {
-      headers: { 'X-CSCAPI-KEY': 'NHhvOEcyWk50N2Vna3VFTE00bFp3MjFKR0ZEOUhkZlg4RTk1MlJlaA==' }
+      headers: { 'X-CSCAPI-KEY': 'V215TjJIREFvYmJQMnd5MEMycHZRNkN2UzUwbmtBQU0yajBPUE1EYg==' }
     }).subscribe(
-      response => this.states = response.map((state: any) => state.name),
+      response => this.states = response.map((state: any) => ({ name: state.name, iso2: state.iso2 })),
       error => console.error('Error fetching states:', error)
     );
   }
 
   fetchCities() {
     if (this.property.state) {
-      this.http.get<any>(`https://api.countrystatecity.in/v1/countries/IN/states/${this.property.state}/cities`, {
-        headers: { 'X-CSCAPI-KEY': 'NHhvOEcyWk50N2Vna3VFTE00bFp3MjFKR0ZEOUhkZlg4RTk1MlJlaA==' }
+      this.http.get<any>(`https://api.countrystatecity.in/v1/countries/IN/states/${this.property.state.iso2}/cities`, {
+        headers: { 'X-CSCAPI-KEY': 'V215TjJIREFvYmJQMnd5MEMycHZRNkN2UzUwbmtBQU0yajBPUE1EYg==' }
       }).subscribe(
         response => this.cities = response.map((city: any) => city.name),
         error => console.error('Error fetching cities:', error)

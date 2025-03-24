@@ -14,7 +14,7 @@ const listProperty = async (req,res) => {
             popertyDimension: { squarefeet },
             location: { country, state, city },
             price,
-            // owner: { ownerId: owner._id, ownerName: owner.name } 
+            owner: { ownerId: req.user._id, ownerName: req.user.name } 
         });
 
         await newProperty.save();
