@@ -52,24 +52,23 @@ export class SellerDashboardComponent {
   }
 
   fetchStates() {
-    this.http.get<any>('https://api.countrystatecity.in/v1/countries/IN/states', {
-      headers: { 'X-CSCAPI-KEY': 'V215TjJIREFvYmJQMnd5MEMycHZRNkN2UzUwbmtBQU0yajBPUE1EYg==' }
-    }).subscribe(
-      response => this.states = response.map((state: any) => ({ name: state.name, iso2: state.iso2 })),
+    const url = `https://api.country-state-city.rebuscando.info/public/getStates?idcountry=101`;
+    this.http.get<any>(url).subscribe(
+      response => this.states = response.map((state: any) => ({ name: state.name, id: state.id })),
       error => console.error('Error fetching states:', error)
     );
   }
 
   fetchCities() {
     if (this.property.state) {
-      this.http.get<any>(`https://api.countrystatecity.in/v1/countries/IN/states/${this.property.state.iso2}/cities`, {
-        headers: { 'X-CSCAPI-KEY': 'V215TjJIREFvYmJQMnd5MEMycHZRNkN2UzUwbmtBQU0yajBPUE1EYg==' }
-      }).subscribe(
+      const url = `https://api.country-state-city.rebuscando.info/public/getCities?idstate=${this.property.state}`;
+      this.http.get<any>(url).subscribe(
         response => this.cities = response.map((city: any) => city.name),
         error => console.error('Error fetching cities:', error)
       );
     }
   }
+
 
   uploadProperty(): void {
     if (!this.property.propertyName || !this.property.squarefeet || !this.property.price || !this.selectedFile) {

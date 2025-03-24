@@ -36,15 +36,15 @@
 
     <div class="form-group">
       <label for="state">State *</label>
-      <select id="state" name="state" [(ngModel)]="property.state" (change)="fetchStates()" class="form-control" required>
+      <select id="state" name="state" [(ngModel)]="property.state" (change)="fetchCities()" class="form-control" required>
         <option value="" disabled selected>Select State</option>
-        <option *ngFor="let state of states" [value]="state">{{ state.name }}</option>
+        <option *ngFor="let state of states" [value]="state.iso2">{{ state.name }}</option>
       </select>
     </div>
 
     <div class="form-group">
       <label for="city">City *</label>
-      <select id="city" name="city" [(ngModel)]="property.city" (change)="fetchCities()" class="form-control" required>
+      <select id="city" name="city" [(ngModel)]="property.city" class="form-control" required>
         <option value="" disabled selected>Select City</option>
         <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
       </select>
