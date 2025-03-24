@@ -7,12 +7,11 @@ const userMiddleware = async (req, res, next) => {
         if (!token) throw new Error('No token provided');
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-        const user = await User.findOne({ _id: decoded.owner, 'tokens.token': token });
+        const user = await User.findOne({ _id: decoded.user});
 
         if (!user) throw new Error('Authentication failed');
 
         req.user = user;
-        req.token = token;
         next();
     } catch (error) {
         res.status(401).send({ error: 'Please authenticate' });
