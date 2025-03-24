@@ -10,7 +10,7 @@ const listProperty = async (req,res) => {
 
         const newProperty = new Property({
             propertyName,
-            propertyImage: req.file.buffer, 
+            // propertyImage: req.file.buffer, 
             popertyDimension: { squarefeet },
             location: { country, state, city },
             price,
