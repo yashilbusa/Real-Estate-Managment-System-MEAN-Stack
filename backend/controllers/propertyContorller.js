@@ -28,7 +28,6 @@ export const listProperty = async (req,res) => {
 // Update Existing Property
 export const updateProperty = async (req, res) => {
     try {
-        const { propertyId } = req.params;
         const { propertyName, squarefeet, country, state, city, price } = req.body;
 
         if (!propertyId) {
@@ -49,7 +48,7 @@ export const updateProperty = async (req, res) => {
         if (price) updatedFields.price = price;
 
         const updatedProperty = await Property.findByIdAndUpdate(
-            propertyId,
+            req.params.id,
             { $set: updatedFields },
             { new: true }
         );
