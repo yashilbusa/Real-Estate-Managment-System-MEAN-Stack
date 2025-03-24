@@ -13,6 +13,10 @@ import { PropertyService } from '../../services/property.service';
 export class BuyerDashboardComponent {
   constructor(private authService: AuthService, private router: Router, private property: PropertyService) {}
   
+  ngOnInit() {
+    this.getAllProperty();
+  }
+
   logout() {
     this.authService.logout();
   }
