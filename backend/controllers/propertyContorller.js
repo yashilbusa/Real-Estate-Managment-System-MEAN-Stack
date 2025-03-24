@@ -1,32 +1,41 @@
 import Property from '../models/Property.js';
 
 // Get All Property
-export const getAllProperty = async (req,res) => {
-    try{
+export const getAllProperty = async (req, res) => {
+    try {
         const allProperties = await Property.find({});
-        // console.log(allProperties);
-        res.status(200).json(allProperties);
-    }catch (error) {
+
+        const formattedProperties = allProperties.map(property => ({
+            ...property._doc,
+            owner: property.owner || { ownerId: 'N/A', ownerName: 'Unknown Owner' }, 
+            propertyImage: property.propertyImage?.data 
+                ? `data:${property.propertyImage.contentType};base64,${property.propertyImage.data.toString('base64')}`
+                : null
+        }));
+
+        res.status(200).json(formattedProperties);
+    } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });
     }
-}
+};
+
 
 // Add New Property
 export const listProperty = async (req,res) => {
     try {
         const { propertyName, propertyImage, squarefeet, country, state, city, price } = req.body;
 
-        if (!propertyName || !squarefeet || !country || !state || !city || !price || req.file) {
+        if (!propertyName || !squarefeet || !country || !state || !city || !price) {
             return res.status(400).json({ message: 'All fields are required' });
         }
 
         const newProperty = new Property({
             propertyName,
-            propertyImage,  
+            //propertyImage:{  data: req.file.buffer, contentType: req.file.mimetype },  
             popertyDimension: { squarefeet },
             location: { country, state, city },
             price,
-            // owner: { ownerId: req.user.ownerId, ownerName: req.user.ownerName }
+            owner: { ownerId: req.user.ownerId, ownerName: req.user.ownerName }
         });
 
         await newProperty.save();

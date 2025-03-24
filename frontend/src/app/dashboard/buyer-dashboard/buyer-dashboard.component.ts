@@ -14,12 +14,12 @@ import { FormsModule } from '@angular/forms';
 })
 export class BuyerDashboardComponent {
 
-  properties:[]= []
+  properties: any[] = []
   constructor(private authService: AuthService, private router: Router, private property: PropertyService) {}
   
-  // ngOnInit() {
-  //   this.getAllProperty();
-  // }
+  ngOnInit() {
+    this.getAllProperty();
+  }
 
   logout() {
     this.authService.logout();

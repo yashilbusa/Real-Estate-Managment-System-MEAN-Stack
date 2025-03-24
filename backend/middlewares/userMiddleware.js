@@ -1,23 +1,23 @@
 import jwt from 'jsonwebtoken';
+import mongoose from 'mongoose';
 import User from '../models/User.js';
 
 const userMiddleware = async (req, res, next) => {
     try {
         const token = req.header('Authorization')?.replace('Bearer ', '');
-        if (!token) throw new Error('No token provided');
+        if (!token) return res.status(401).json({ error: 'No token provided' });
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-        const user = await User.findOne({ _id: decoded.ownerId, name: decoded.ownerName, role: decoded.role});
 
-        if (!user) throw new Error('Authentication failed');
+        const user = await User.findById(decoded.ownerId);
+        
+        if (!user) return res.status(401).json({ error: 'Authentication failed' });
 
-        req.user = user;
-        req.token = token;
+        req.user = {  ownerId: user._id.toString(), ownerName: user.name }; 
         next();
     } catch (error) {
-        res.status(401).send({ error: 'Please authenticate' });
+        res.status(401).json({ error: 'Please authenticate' });
     }
 };
 
 export default userMiddleware;
-

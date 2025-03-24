@@ -2,6 +2,16 @@
 <br>
 <button (click)="logout()">Logout</button>
 <br>
-<button (click)="getAllProperty()">Fetch All Property</button>
-
-<p>{{ properties }}</p>
+<div *ngFor="let property of properties; let i = index" class="property-card">
+  <h2><b>{{ i + 1 }}. {{ property.propertyName }}</b></h2>
+  <p><strong>Location:</strong> {{ property.location.city }}, {{ property.location.state }}, {{ property.location.country }}</p>
+  <p><strong>Dimension:</strong> {{ property.popertyDimension.squarefeet }} sqft</p>
+  <p><strong>Price:</strong> ${{ property.price }}</p>
+  <p><strong>Owner:</strong> {{ property.owner?.ownerName || 'Unknown Owner' }}</p>
+  
+  <div *ngIf="property.propertyImage">
+    <img [src]="property.propertyImage" alt="Property Image" width="200">
+  </div>
+  
+  <hr> 
+</div>

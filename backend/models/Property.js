@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const propertySchema = new mongoose.Schema({
     propertyName: { type:String, required: true },
-    propertyImage: { data: Buffer, type: String, required: true },
+    //propertyImage: { data: Buffer, contentType: String },
     popertyDimension: { 
         squarefeet: { type: Number, required: true }
     },
@@ -12,10 +12,10 @@ const propertySchema = new mongoose.Schema({
         city: { type:String },
     },
     price: { type:Number, required: true },
-    // owner: { 
-    //     ownerId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-    //     ownerName: { type: String, required: true, ref: "User" }
-    // }
+    owner: { 
+        ownerId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+        ownerName: { type: String, required: true, ref: "User" }
+    }
 });
 
 const Property = mongoose.model('Property', propertySchema);
