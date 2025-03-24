@@ -4,6 +4,7 @@ import Property from '../models/Property.js';
 export const getAllProperty = async (req,res) => {
     try{
         const allProperties = await Property.find({});
+        // console.log(allProperties);
         res.status(200).json(allProperties);
     }catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });

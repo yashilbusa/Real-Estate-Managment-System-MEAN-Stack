@@ -12,6 +12,6 @@ export class PropertyService {
   constructor(private http: HttpClient) { }
 
   fetchAllProperty(){
-    this.http.get(`${this.apiUrl}/getAllProperty`);
+    return this.http.get(`${this.apiUrl}/getAllProperty`);
   }
 }
