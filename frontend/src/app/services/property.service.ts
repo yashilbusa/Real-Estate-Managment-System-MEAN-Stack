@@ -7,11 +7,15 @@ import { environment } from '../../environments/environment';
 })
 export class PropertyService {
 
-    apiUrl = environment.backendUrl;
+  apiUrl = environment.backendUrl;
   
   constructor(private http: HttpClient) { }
 
   fetchAllProperty(){
     return this.http.get(`${this.apiUrl}/getAllProperty`);
+  }
+
+  createProperty(propertyData: any){
+    return this.http.post(`${this.apiUrl}/listProperty`, propertyData);
   }
 }

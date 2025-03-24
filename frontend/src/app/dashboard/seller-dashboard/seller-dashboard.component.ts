@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { PropertyService } from '../../services/property.service';
 
 @Component({
   selector: 'app-seller-dashboard',
@@ -28,7 +29,7 @@ export class SellerDashboardComponent {
   states: { name: string; iso2: string }[] = []; 
   cities: string[] = [];
 
-  constructor(private authService: AuthService, private router: Router, private http: HttpClient) {
+  constructor(private authService: AuthService, private router: Router, private http: HttpClient, private propertyService: PropertyService ) {
     this.fetchStates();
   }
 
@@ -69,11 +70,48 @@ export class SellerDashboardComponent {
     }
   }
 
-
   uploadProperty(): void {
     if (!this.property.propertyName || !this.property.squarefeet || !this.property.price || !this.selectedFile) {
       this.imageError = 'Please fill in all required fields and upload an image.';
       return;
     }
+
+    const formData = new FormData();
+    formData.append('propertyName', this.property.propertyName);
+    formData.append('squarefeet', String(this.property.squarefeet));
+    formData.append('country', this.property.country);
+    formData.append('state', this.property.state);
+    formData.append('city', this.property.city);
+    formData.append('price', String(this.property.price));
+
+    if (this.selectedFile) {
+      formData.append('propertyImage', this.selectedFile);
+    }
+
+    this.propertyService.createProperty(formData).subscribe(
+      response => {
+        console.log('Property listed successfully', response);
+        alert('Property listed successfully!');
+        this.resetForm();
+      },
+      error => {
+        console.error('Error listing property:', error);
+        alert('Failed to list property.');
+      }
+    );
+  }
+
+  resetForm() {
+    this.property = {
+      propertyName: '',
+      squarefeet: null,
+      country: 'India',
+      state: '',
+      city: '',
+      price: null
+    };
+    this.selectedFile = null;
+    this.imageError = null;
   }
 }
+  
