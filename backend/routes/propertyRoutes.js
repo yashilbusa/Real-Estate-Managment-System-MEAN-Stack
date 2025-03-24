@@ -1,10 +1,14 @@
 import express from 'express';
-import userMiddleware from '../middlewares/userMiddleware.js'
 import listProperty from '../controllers/propertyContorller.js';
+import multer from 'multer';
+
 
 const router = express.Router();
 
-router.post("/listNewProperty",listProperty);
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+router.post("/listNewProperty",upload.single('propertyImage'),listProperty);
 
 
 export default router;
