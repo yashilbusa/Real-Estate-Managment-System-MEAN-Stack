@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const propertySchema = new mongoose.Schema({
     propertyName: { type:String, required: true },
-    // propertyImage: { data: Buffer, type: String, required: true },
+    propertyImage: { data: Buffer, type: String, required: true },
     popertyDimension: { 
         squarefeet: { type: Number, required: true }
     },

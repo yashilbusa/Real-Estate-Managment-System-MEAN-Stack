@@ -1,17 +1,27 @@
 import Property from '../models/Property.js';
 
+// Get All Property
+export const getAllProperty = async (req,res) => {
+    try{
+        const allProperties = await Property.find({});
+        res.status(200).json(allProperties);
+    }catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.message });
+    }
+}
+
 // Add New Property
 export const listProperty = async (req,res) => {
     try {
-        const { propertyName, squarefeet, country, state, city, price } = req.body;
+        const { propertyName, propertyImage, squarefeet, country, state, city, price } = req.body;
 
-        if (!propertyName || !squarefeet || !country || !state || !city || !price) {
+        if (!propertyName || !squarefeet || !country || !state || !city || !price || req.file) {
             return res.status(400).json({ message: 'All fields are required' });
         }
 
         const newProperty = new Property({
             propertyName,
-            // propertyImage: req.file.buffer,  
+            propertyImage,  
             popertyDimension: { squarefeet },
             location: { country, state, city },
             price,
