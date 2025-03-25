@@ -10,6 +10,7 @@ import { Adminguard } from './guards/admin.guard';
 import { RoleGuard } from './guards/role.guard';
 import { RedirectGuard } from './guards/redirect.guard';
 import { EditPropertyComponent } from './dashboard/seller-dashboard/edit-property/edit-property.component';
+import { AddPropertyComponent } from './dashboard/seller-dashboard/add-property/add-property.component';
 
 export const routes: Routes = [
     { path: 'signup', component:SignupComponent, canActivate: [RedirectGuard]},
@@ -18,6 +19,7 @@ export const routes: Routes = [
     { path: 'buyer-dashboard', component: BuyerDashboardComponent, canActivate: [AuthGuard,RoleGuard] },
     { path: 'seller-dashboard', component: SellerDashboardComponent, canActivate: [AuthGuard,RoleGuard] },
     { path: 'agent-dashboard', component: AgentDashboardComponent, canActivate: [AuthGuard,RoleGuard] },
+    { path: 'add-property', component:AddPropertyComponent, canActivate: [AuthGuard] },
     { path: 'edit-property/:id', component:EditPropertyComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo:'signup', pathMatch:'full'}
 ];

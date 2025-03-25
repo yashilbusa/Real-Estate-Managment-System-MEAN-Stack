@@ -21,8 +21,8 @@
     <tbody>
       <tr *ngFor="let property of properties">
         <td>{{ property.propertyName }}</td>
-        <td>{{ property.squarefeet }}</td>
-        <td>{{ property.city }}, {{ property.state }}, {{ property.country }}</td>
+        <td>{{ property.popertyDimension.squarefeet }}</td>
+        <td>{{ property.location.city }}, {{ property.location.state }}, {{ property.location.country }}</td>
         <td>{{ property.price }}</td>
         <td>
           <button class="btn btn-warning btn-sm" (click)="editProperty(property)">Edit</button>
@@ -31,9 +31,11 @@
       </tr>
     </tbody>
   </table>
+  <button class="btn btn-primary" routerLink="/add-property" >Add New Property</button>
 </div>
 
 
+<!-- 
 <div class="container">
   <h2>Create Property Listing</h2>
   <form #listingForm="ngForm" (ngSubmit)="uploadProperty()">
@@ -93,4 +95,4 @@
 
     <button type="submit" class="btn btn-primary">Create Listing</button>
   </form>
-</div>
+</div> -->

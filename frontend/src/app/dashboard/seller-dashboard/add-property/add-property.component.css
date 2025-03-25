@@ -1,0 +1,68 @@
+.user-profile {
+    position: absolute;
+    height: 70px;
+    padding: 10px;
+    top: 10px;
+    right: 20px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+    }
+  
+    .form-group {
+      margin-bottom: 15px;
+    }
+  
+    .form-group label {
+      font-weight: bold;
+    }
+  
+    .form-control {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+  
+    .error {
+      color: red;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+  
+    .btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: background 0.3s;
+    }
+  
+    .btn:hover {
+      background-color: #0056b3;
+    }
+  
+    @media (max-width: 768px) {
+      .container {
+        width: 90%;
+        padding: 15px;
+      }
+    }
