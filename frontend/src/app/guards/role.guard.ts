@@ -28,8 +28,6 @@ export class RoleGuard implements CanActivate {
       return true;
     } else if (role === 'seller' && currentPath === '/seller-dashboard') {
       return true;
-    } else if (role === 'agent' && currentPath === '/agent-dashboard') {
-      return true;
     }
 
     this.authService.logout();

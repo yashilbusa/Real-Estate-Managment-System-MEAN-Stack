@@ -28,8 +28,6 @@ export class RedirectGuard implements CanActivate {
         this.router.navigate(['/buyer-dashboard']);
       } else if (role === 'seller') {
         this.router.navigate(['/seller-dashboard']);
-      } else if (role === 'agent') {
-        this.router.navigate(['/agent-dashboard']);
       } else {
         this.router.navigate(['/login']); 
       }
