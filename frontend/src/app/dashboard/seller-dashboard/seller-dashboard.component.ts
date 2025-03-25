@@ -31,8 +31,13 @@ export class SellerDashboardComponent {
 
   ngOnInit() {
     this.getAllProperty();
+    this.loadUserProfile();
+  }
+
+  loadUserProfile() {
     this.authService.getUserProfile().subscribe({
       next: (userData) => {
+        console.info("User profile fetched successfully:", userData);
         this.user = userData;
       },
       error: (err) => {

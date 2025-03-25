@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
@@ -22,11 +22,12 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.http.post<{ token: string; role: string }>(`${this.apiUrl}/login`, { email, password });
-  }  
-  
-  getUserProfile(): Observable<any> {
+  } 
+   
+  getUserProfile(){
+    const token = localStorage.getItem('token') || '';
     return this.http.get(`${this.apiUrl}/userProfile`, {
-      headers: { 'Authorization': `Bearer ${ typeof window !== 'undefined' ? localStorage.getItem('token'): '' }` }
+      headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
     });
   }
   
