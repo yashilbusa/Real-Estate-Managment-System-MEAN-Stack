@@ -37,7 +37,6 @@ export class AddPropertyComponent {
   }
 
   ngOnInit() {
-    this.getAllProperty();
     this.authService.getUserProfile().subscribe({
       next: (userData) => {
         this.user = userData;
@@ -46,6 +45,10 @@ export class AddPropertyComponent {
         console.error("Error fetching user profile:", err);
       }
     });
+  }
+
+  backDashboard(){
+    this.router.navigate(['/seller-dashboard']);
   }
   
   getAllProperty(){
