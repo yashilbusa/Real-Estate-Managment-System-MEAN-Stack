@@ -34,6 +34,6 @@ export class PropertyService {
   }
 
   deleteProperty(propertyId:any){
-    return this.http.delete(`${this.apiUrl}/deleteProperty/:${propertyId}`, this.getHeaders());
+    return this.http.delete(`${this.apiUrl}/deleteProperty/${propertyId}`, this.getHeaders());
   }
 }
