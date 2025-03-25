@@ -7,7 +7,7 @@ export const getAllProperty = async (req, res) => {
 
         const formattedProperties = allProperties.map(property => ({
             ...property._doc,
-            owner: property.owner || { ownerId: 'N/A', ownerName: 'Unknown Owner' }, 
+            owner: property.owner || { ownerName: 'Unknown Owner' }, 
             propertyImage: property.propertyImage?.data 
                 ? `data:${property.propertyImage.contentType};base64,${property.propertyImage.data.toString('base64')}`
                 : null

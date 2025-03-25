@@ -2,6 +2,7 @@
 <br>
 <button (click)="logout()">Logout</button>
 <br>
+<hr>
 <div *ngFor="let property of properties; let i = index" class="property-card">
   <h2><b>{{ i + 1 }}. {{ property.propertyName }}</b></h2>
   <p><strong>Location:</strong> {{ property.location.city }}, {{ property.location.state }}, {{ property.location.country }}</p>
@@ -11,7 +12,7 @@
   
   <div *ngIf="property.propertyImage">
     <img [src]="property.propertyImage" alt="Property Image" width="200">
-  </div>
+  </div>  
   
   <hr> 
 </div>
