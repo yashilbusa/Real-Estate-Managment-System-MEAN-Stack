@@ -13,12 +13,12 @@ const app = express();
 const port = process.env.PORT;
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin : 'http://localhost:4200'}));
 app.use(bodyparser.json());
 
 mongoose.connect(process.env.MONGO_URL)
     .then(() => console.info('Connected to MongoDB'))
-    .catch(err => console.error('Error Connecting to MongoDB', err));
+    .catch(err => console.info('Error Connecting to MongoDB', err));
 
 
 app.use("/", authRoutes);

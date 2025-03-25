@@ -23,7 +23,7 @@ export const signup = async (req, res) => {
         // try {
         //     await sendMail(email, 'Registration Confirm!!!', `Your Role is: <b>${role}</b>`);
         // } catch (error) {
-        //     console.error("Email sending failed:", error);
+        //     console.info("Email sending failed:", error);
         //     return res.status(500).json({ error: "Failed to send email, but account is created." });
         // }
 
@@ -31,7 +31,7 @@ export const signup = async (req, res) => {
 
         res.status(201).json({ message: "User registered successfully."});
     } catch (error) {
-        console.error("Signup error:", error);
+        console.info("Signup error:", error);
         res.status(500).json({ error: "Server error" });
     }
 };

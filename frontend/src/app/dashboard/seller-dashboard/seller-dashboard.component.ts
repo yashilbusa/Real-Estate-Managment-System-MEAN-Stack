@@ -35,7 +35,7 @@ export class SellerDashboardComponent {
 
   logout() {
     this.authService.logout();
-    console.log('Logout clicked');
+    console.info('Logout clicked');
   }
 
   fileSelected(event: any) {
@@ -53,19 +53,22 @@ export class SellerDashboardComponent {
   }
 
   fetchStates() {
-    const url = `https://api.country-state-city.rebuscando.info/public/getStates?idcountry=101`;
-    this.http.get<any>(url).subscribe(
-      response => this.states = response.map((state: any) => ({ name: state.name, id: state.id })),
-      error => console.error('Error fetching states:', error)
+    this.http.get<any>('https://api.countrystatecity.in/v1/countries/IN/states', {
+      headers: { 'X-CSCAPI-KEY': 'V215TjJIREFvYmJQMnd5MEMycHZRNkN2UzUwbmtBQU0yajBPUE1EYg==' }
+    }).subscribe(
+      response => this.states = response.map((state: any) => ({ name: state.name, iso2: state.iso2 })),
+      error => console.info('Error fetching states:', error)
     );
   }
 
   fetchCities() {
     if (this.property.state) {
-      const url = `https://api.country-state-city.rebuscando.info/public/getCities?idstate=${this.property.state}`;
-      this.http.get<any>(url).subscribe(
+      const code = this.property.state;
+      this.http.get<any>(`https://api.countrystatecity.in/v1/countries/IN/states/${code}/cities`, {
+        headers: { 'X-CSCAPI-KEY': 'V215TjJIREFvYmJQMnd5MEMycHZRNkN2UzUwbmtBQU0yajBPUE1EYg==' }
+      }).subscribe(
         response => this.cities = response.map((city: any) => city.name),
-        error => console.error('Error fetching cities:', error)
+        error => console.info('Error fetching cities:', error)
       );
     }
   }
@@ -90,12 +93,12 @@ export class SellerDashboardComponent {
 
     this.propertyService.createProperty(formData).subscribe(
       response => {
-        console.log('Property listed successfully', response);
+        console.info('Property listed successfully', response);
         alert('Property listed successfully!');
         this.resetForm();
       },
       error => {
-        console.error('Error listing property:', error);
+        console.info('Error listing property:', error);
         alert('Failed to list property.');
       }
     );

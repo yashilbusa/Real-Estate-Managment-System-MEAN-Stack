@@ -10,8 +10,8 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 router.get('/getAllProperty', getAllProperty);
-router.post('/listNewProperty', upload.single('propertyImage'), userMiddleware, listProperty);
-router.put('/updateProperty/:propertyId', upload.single('propertyImage'), userMiddleware, updateProperty);
+router.post('/listNewProperty', userMiddleware, upload.single('propertyImage'), listProperty);
+router.put('/updateProperty/:propertyId', userMiddleware, upload.single('propertyImage'), updateProperty);
 router.delete('/deleteProperty/:propertyId', userMiddleware, deleteProperty);
 
 

@@ -35,7 +35,7 @@ export class LoginComponent {
         this.navigateToDashboard(res.role);
       },
       error: (err) => {
-        console.error('Login error:', err);
+        console.info('Login error:', err);
       }
     });
   }
