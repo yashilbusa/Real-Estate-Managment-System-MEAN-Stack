@@ -3,12 +3,23 @@
 <button (click)="logout()">Logout</button>
 <br>
 <hr>
-<div *ngFor="let property of properties; let i = index" class="property-card">
+
+<div>
+  <input type="text" placeholder="Enter City" [(ngModel)]="searchCriteria.city">
+  <input type="number" placeholder="Min Price" [(ngModel)]="searchCriteria.minPrice">
+  <input type="number" placeholder="Max Price" [(ngModel)]="searchCriteria.maxPrice">
+  <input type="number" placeholder="Min Size (sqft)" [(ngModel)]="searchCriteria.minSize">
+  <input type="number" placeholder="Max Size (sqft)" [(ngModel)]="searchCriteria.maxSize">
+  <button (click)="filterProperties()">Search</button>
+</div>
+
+<hr>
+<div *ngFor="let property of fProperties; let i = index" class="property-card">
   <h2><b>{{ i + 1 }}. {{ property.propertyName }}</b></h2>
-  <p><strong>Location:</strong> {{ property.location.city }}, {{ property.location.state }}, {{ property.location.country }}</p>
-  <p><strong>Dimension:</strong> {{ property.popertyDimension.squarefeet }} sqft</p>
-  <p><strong>Price:</strong> ${{ property.price }}</p>
-  <p><strong>Owner:</strong> {{ property.owner?.ownerName || 'Unknown Owner' }}</p>
+  <p><b>Location:</b> {{ property.location.city }}, {{ property.location.state }}, {{ property.location.country }}</p>
+  <p><b>Dimension:</b> {{ property.popertyDimension.squarefeet }} sqft</p>
+  <p><b>Price:</b> ₹{{ property.price }}</p>
+  <p><b>Owner:</b> {{ property.owner?.ownerName || 'Unknown Owner' }}</p>
   
   <div *ngIf="property.propertyImage">
     <img [src]="property.propertyImage" alt="Property Image" width="200">
