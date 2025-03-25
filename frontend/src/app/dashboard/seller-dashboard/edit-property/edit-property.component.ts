@@ -17,12 +17,14 @@ export class EditPropertyComponent {
     propertyName: '',
     squarefeet: '',
     price: ''
-  };  
+  }; 
+  propertyId:any;
+
   constructor( private route: ActivatedRoute, private router: Router, private propertyService: PropertyService) {}
   
   ngOnInit() {
-    const propertyId = this.route.snapshot.paramMap.get('id');
-    if (propertyId) {
+    this.propertyId = this.route.snapshot.paramMap.get('id');
+    if (this.propertyId) {
       this.propertyService.fetchAllProperty().subscribe((p: any) => {
         this.property = p;
       });
@@ -30,7 +32,7 @@ export class EditPropertyComponent {
   }
 
   updateProperty() {
-    this.propertyService.updateProperty(this.property._id, this.property).subscribe({
+    this.propertyService.updateProperty(this.propertyId, this.property).subscribe({
       next: () => {
         alert("Property updated successfully!");
         this.router.navigate(['/seller-dashboard']);

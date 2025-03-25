@@ -60,6 +60,31 @@
     background-color: #0056b3;
   }
 
+  .task-icons {
+    display: flex;
+    gap: 10px;
+  }
+
+  .edit-icon, .delete-icon {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #4CAF50; 
+  }
+
+  .delete-icon {
+      color: #F44336; 
+  }
+
+  .edit-icon:hover {
+      color: #76d7c4;
+  }
+
+  .delete-icon:hover {
+      color: #ff6f61;
+  }
+  
   @media (max-width: 768px) {
     .container {
       width: 90%;
