@@ -16,6 +16,7 @@ import { PropertyService } from '../../services/property.service';
 })
 export class SellerDashboardComponent {
   user: any = {};
+  properties: any[] = [];
 
   property: any = {
     propertyName: '',
@@ -36,6 +37,7 @@ export class SellerDashboardComponent {
   }
 
   ngOnInit() {
+    this.getAllProperty();
     this.authService.getUserProfile().subscribe({
       next: (userData) => {
         this.user = userData;
@@ -51,6 +53,30 @@ export class SellerDashboardComponent {
     console.info('Logout clicked');
   }
 
+  getAllProperty(){
+    this.property.fetchAllProperty().subscribe((p:any)=>{
+      this.properties = p;
+      // console.log(this.properties);
+    });
+  }
+
+  editProperty(property: any) {
+    this.router.navigate(['/edit-property', property._id]);
+  }
+
+  deleteProperty(propertyId: string) {
+    if (confirm("Are you sure you want to delete this property?")) {
+      this.propertyService.deleteProperty(propertyId).subscribe({
+        next: () => {
+          alert("Property deleted successfully!");
+          this.getAllProperty();
+        },
+        error: (err) => {
+          console.error("Error deleting property:", err);
+        }
+      });
+    }
+  }
   fileSelected(event: any) {
     const file = event.target.files[0];
     if (file) {

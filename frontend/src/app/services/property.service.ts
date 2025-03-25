@@ -28,4 +28,12 @@ export class PropertyService {
   createProperty(propertyData: any){
     return this.http.post(`${this.apiUrl}/listNewProperty`, propertyData, this.getHeaders());
   }
+
+  updateProperty(propertyId: string, updatedData: any) {
+    return this.http.put(`${this.apiUrl}/updateProperty/${propertyId}`, updatedData, this.getHeaders());
+  }
+
+  deleteProperty(propertyId:any){
+    return this.http.delete(`${this.apiUrl}/deleteProperty/:${propertyId}`, this.getHeaders());
+  }
 }

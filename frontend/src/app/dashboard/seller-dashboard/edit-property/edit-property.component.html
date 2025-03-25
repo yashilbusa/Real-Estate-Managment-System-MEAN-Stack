@@ -1,0 +1,23 @@
+<div class="container">
+    <h2>Edit Property</h2>
+    <form (ngSubmit)="updateProperty()">
+      <div class="form-group">
+        <label for="propertyName">Property Name *</label>
+        <input type="text" id="propertyName" [(ngModel)]="property.propertyName" class="form-control" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="squarefeet">Property Dimension (sq ft) *</label>
+        <input type="number" id="squarefeet" [(ngModel)]="property.squarefeet" class="form-control" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="price">Price *</label>
+        <input type="number" id="price" [(ngModel)]="property.price" class="form-control" required>
+      </div>
+  
+      <button type="submit" class="btn btn-success">Update Property</button>
+      <button type="button" class="btn btn-secondary" routerLink="/seller-dashboard" >Cancel</button>
+    </form>
+  </div>
+  
