@@ -1,3 +1,16 @@
+.user-profile {
+  position: absolute;
+  height: 70px;
+  padding: 10px;
+  top: 10px;
+  right: 20px;
+  background-color: #f1f1f1;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+}
+
 .container {
     max-width: 600px;
     margin: auto;

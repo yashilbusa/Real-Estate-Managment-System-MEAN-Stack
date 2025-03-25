@@ -1,6 +1,11 @@
 <p>seller-dashboard works!</p>
 <button (click)="logout()">Logout</button>
 
+<div class="user-profile">
+  <p>Welcome, {{ user.name }}</p>
+  <p>Email: {{ user.email }}</p>
+</div>
+
 <div class="container">
   <h2>Create Property Listing</h2>
   <form #listingForm="ngForm" (ngSubmit)="uploadProperty()">

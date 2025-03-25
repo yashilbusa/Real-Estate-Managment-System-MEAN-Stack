@@ -19,10 +19,20 @@ export class BuyerDashboardComponent {
 
   searchCriteria = { city: '', minPrice: null, maxPrice: null, minSize: null, maxSize: null };
 
+  user: any = {};
+
   constructor(private authService: AuthService, private router: Router, private property: PropertyService) {}
 
   ngOnInit() {
     this.getAllProperty();
+    this.authService.getUserProfile().subscribe({
+      next: (userData) => {
+        this.user = userData;
+      },
+      error: (err) => {
+        console.error("Error fetching user profile:", err);
+      }
+    });
   }
 
   logout() {

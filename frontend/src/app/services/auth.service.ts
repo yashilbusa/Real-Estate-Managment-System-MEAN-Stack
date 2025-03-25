@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,12 @@ export class AuthService {
   login(email: string, password: string) {
     return this.http.post<{ token: string; role: string }>(`${this.apiUrl}/login`, { email, password });
   }  
+  
+  getUserProfile(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/userProfile`, {
+      headers: { 'Authorization': `Bearer ${ typeof window !== 'undefined' ? localStorage.getItem('token'): '' }` }
+    });
+  }
   
   logout() {
     if (typeof window !== 'undefined') {

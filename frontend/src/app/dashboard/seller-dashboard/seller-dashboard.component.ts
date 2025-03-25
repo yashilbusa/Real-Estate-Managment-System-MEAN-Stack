@@ -15,6 +15,8 @@ import { PropertyService } from '../../services/property.service';
   styleUrl: './seller-dashboard.component.css'
 })
 export class SellerDashboardComponent {
+  user: any = {};
+
   property: any = {
     propertyName: '',
     squarefeet: null,
@@ -31,6 +33,17 @@ export class SellerDashboardComponent {
 
   constructor(private authService: AuthService, private router: Router, private http: HttpClient, private propertyService: PropertyService ) {
     this.fetchStates();
+  }
+
+  ngOnInit() {
+    this.authService.getUserProfile().subscribe({
+      next: (userData) => {
+        this.user = userData;
+      },
+      error: (err) => {
+        console.error("Error fetching user profile:", err);
+      }
+    });
   }
 
   logout() {
