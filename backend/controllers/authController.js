@@ -61,7 +61,14 @@ export const login = async (req, res) => {
 };
 
 // Get User Profile
-
 export const getUserProfile = async (req,res) => {
-    
+    try {
+        res.status(200).json({
+            name: req.user.name,
+            email: req.user.email
+        });
+    } catch (error) {
+        console.error("Error fetching user profile:", error);
+        res.status(500).json({ error: "Server Error" });
+    }
 }
