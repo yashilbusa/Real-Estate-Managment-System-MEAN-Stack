@@ -56,7 +56,7 @@ export class SellerDashboardComponent {
   getAllProperty(){
     this.propertyService.fetchAllProperty().subscribe((p:any)=>{
       this.properties = p;
-      // console.log(this.properties);
+      // console.info(this.properties);
     });
   }
 

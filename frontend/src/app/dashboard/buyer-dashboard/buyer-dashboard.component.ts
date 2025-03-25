@@ -43,7 +43,7 @@ export class BuyerDashboardComponent {
     this.property.fetchAllProperty().subscribe((p:any)=>{
       this.properties = p;
       this.fProperties = p;
-      console.log(this.properties);
+      console.info(this.properties);
     });
   }
 

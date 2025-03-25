@@ -51,7 +51,7 @@ export class AddPropertyComponent {
   getAllProperty(){
     this.property.fetchAllProperty().subscribe((p:any)=>{
       this.properties = p;
-      // console.log(this.properties);
+      // console.info(this.properties);
     });
   }
 
