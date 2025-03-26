@@ -1,5 +1,6 @@
 import Property from '../models/Property.js';
 
+
 // Get All Property
 export const getAllProperty = async (req, res) => {
     try {
@@ -45,6 +46,7 @@ export const listProperty = async (req,res) => {
     }
 }
 
+
 // Update Existing Property
 export const updateProperty = async (req, res) => {
     try {
@@ -76,6 +78,7 @@ export const updateProperty = async (req, res) => {
     }
 };
 
+
 // Delete Property
 export const deleteProperty = async (req,res) => {
     try{
@@ -91,6 +94,7 @@ export const deleteProperty = async (req,res) => {
         res.status(500).json({ message: 'Server error', error: error.message });  
     }
 }
+
 
 // Get Perticular Seller Properties
 export const getSellerProperties = async (req,res) => {
