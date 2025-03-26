@@ -14,10 +14,8 @@ const propertySchema = new mongoose.Schema({
     price: { type:Number, required: true },
     owner: { 
         ownerId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-        // ownerName: { type: String, required: true, ref: "User" }
-    },
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
-    
+        ownerName: { type: String, required: true, ref: "User" }
+    },    
 });
 
 const Property = mongoose.model('Property', propertySchema);
