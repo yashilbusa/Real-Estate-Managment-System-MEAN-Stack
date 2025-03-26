@@ -60,7 +60,7 @@ export class EditPropertyComponent {
       }
     }
   }
-
+  
   fetchStates() {
     this.http.get<any>('https://api.countrystatecity.in/v1/countries/IN/states', {
       headers: { 'X-CSCAPI-KEY': 'V215TjJIREFvYmJQMnd5MEMycHZRNkN2UzUwbmtBQU0yajBPUE1EYg==' }

@@ -116,6 +116,7 @@ export class AddPropertyComponent {
         console.info('Property listed successfully', response);
         alert('Property listed successfully!');
         this.resetForm();
+        this.router.navigate(['/seller-dashboard']);
       },
       error => {
         console.info('Error listing property:', error);
