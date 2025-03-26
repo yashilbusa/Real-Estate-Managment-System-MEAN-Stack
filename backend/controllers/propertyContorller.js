@@ -95,3 +95,17 @@ export const deleteProperty = async (req,res) => {
         res.status(500).json({ message: 'Server error', error: error.message });  
     }
 }
+
+// Get Perticular Seller Properties
+export const getSellerProperties = async (req,res) => {
+    try{
+    const sellerId = req.user.ownerId;
+
+    const sellerProperties = await Property.find({ "owner.ownerId": sellerId });
+
+    res.status(200).json(sellerProperties);
+
+    } catch (error){
+        res.status(500).json({ message: 'Server error', error: error.message });  
+    }
+}

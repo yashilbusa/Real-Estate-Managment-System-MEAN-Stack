@@ -30,7 +30,7 @@ export class SellerDashboardComponent {
   constructor(private authService: AuthService, private router: Router, private http: HttpClient, private propertyService: PropertyService ) {}
 
   ngOnInit() {
-    this.getAllProperty();
+    this.getSellerProperties();
     this.loadUserProfile();
   }
 
@@ -55,8 +55,8 @@ export class SellerDashboardComponent {
     console.info('Logout clicked');
   }
 
-  getAllProperty(){
-    this.propertyService.fetchAllProperty().subscribe((p:any)=>{
+  getSellerProperties(){
+    this.propertyService.getSellerProperties().subscribe((p:any)=>{
       this.properties = p;
       // console.info(this.properties);
     });
@@ -71,7 +71,7 @@ export class SellerDashboardComponent {
       this.propertyService.deleteProperty(propertyId).subscribe({
         next: () => {
           alert("Property deleted successfully!");
-          this.getAllProperty();
+          this.getSellerProperties();
         },
         error: (err) => {
           console.error("Error deleting property:", err);
