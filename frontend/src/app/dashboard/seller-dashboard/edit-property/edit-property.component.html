@@ -1,25 +1,65 @@
 <div class="container">
-  <h2>Edit Property</h2>
-  <hr>
-  <form (ngSubmit)="updateProperty()">
+  <h1>Edit Property Listing</h1>
+  <br>
+  <form #editForm="ngForm" (ngSubmit)="updateProperty()">
+    
     <div class="form-group">
       <label for="propertyName">Property Name *</label>
       <input type="text" id="propertyName" name="propertyName" [(ngModel)]="property.propertyName" class="form-control" required>
+      <div *ngIf="!property.propertyName && editForm.submitted" class="error">
+        Property name is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="propertyImage">Upload Property Image *</label>
+      <input type="file" id="propertyImage" (change)="fileSelected($event)" class="form-control">
+      <div *ngIf="imageError" class="error">
+        {{ imageError }}
+      </div>
     </div>
 
     <div class="form-group">
       <label for="squarefeet">Property Dimension (sq ft) *</label>
       <input type="number" id="squarefeet" name="squarefeet" [(ngModel)]="property.squarefeet" class="form-control" required>
+      <div *ngIf="!property.squarefeet && editForm.submitted" class="error">
+        Square feet is required and must be a number.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="country">Country *</label>
+      <input type="text" id="country" name="country" [(ngModel)]="property.country" class="form-control" disabled>
+    </div>
+
+    <div class="form-group">
+      <label for="state">State *</label>
+      <select id="state" name="state" [(ngModel)]="property.state" (change)="fetchCities()" class="form-control" required>
+        <option value="" disabled selected>Select State</option>
+        <option *ngFor="let state of states" [value]="state.iso2">{{ state.name }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="city">City *</label>
+      <select id="city" name="city" [(ngModel)]="property.city" class="form-control" required>
+        <option value="" disabled selected>Select City</option>
+        <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+      </select>
     </div>
 
     <div class="form-group">
       <label for="price">Price *</label>
       <input type="number" id="price" name="price" [(ngModel)]="property.price" class="form-control" required>
+      <div *ngIf="!property.price && editForm.submitted" class="error">
+        Price is required and must be a number.
+      </div>
     </div>
 
-    <hr>
     <button type="submit" class="btn btn-success">Update Property</button>
     <br>
-    <button type="button" class="btn btn-secondary" routerLink="/seller-dashboard">Cancel</button>
+    <br>
+    <button (click)="cancel()">Cancel</button>
+
   </form>
 </div>

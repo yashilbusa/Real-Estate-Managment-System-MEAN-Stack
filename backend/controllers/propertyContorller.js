@@ -51,16 +51,14 @@ export const listProperty = async (req,res) => {
 export const updateProperty = async (req, res) => {
     try {
         const { propertyId } = req.params;
-        const { propertyName, squarefeet, price } = req.body;
-
-        if (!propertyId) {
-            return res.status(400).json({ message: 'Property ID is required' });
-        }
-
-        const updatedFields = {};
-        if (propertyName) updatedFields.propertyName = propertyName;
-        if (squarefeet) updatedFields.squarefeet = squarefeet; 
-        if (price) updatedFields.price = price;
+        const { propertyName, propertyImage, squarefeet, country, state, city, price } = req.body;
+        let updatedFields = { 
+            propertyName, 
+            propertyImage: {  data: req.file.buffer, contentType: req.file.mimetype },  
+            popertyDimension: { squarefeet },
+            location: { country, state, city }, 
+            price 
+        };
 
         const updatedProperty = await Property.findByIdAndUpdate(
             propertyId,
@@ -68,15 +66,12 @@ export const updateProperty = async (req, res) => {
             { new: true } 
         );
 
-        if (!updatedProperty) {
-            return res.status(404).json({ message: 'Property not found' });
-        }
-
         res.status(200).json({ message: 'Property updated successfully', updatedProperty });
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });
     }
 };
+
 
 
 // Delete Property
