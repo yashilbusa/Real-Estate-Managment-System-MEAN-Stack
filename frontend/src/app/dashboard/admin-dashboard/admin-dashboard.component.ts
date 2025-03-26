@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AdminService } from '../../services/admin.service';
+import { error } from 'console';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -15,10 +17,15 @@ import { FormsModule } from '@angular/forms';
 export class AdminDashboardComponent {
   admin: any = {};
 
-  constructor(private authService: AuthService, private router: Router, private cookie:CookieService) {}
+  buyers: any[] = [];
+  sellers: any[] = [];
+
+  constructor(private authService: AuthService, private router: Router, private cookie:CookieService, private adminservice: AdminService) {}
 
   ngOnInit(){ 
     this.loadAdminProfile();
+    this.fetchBuyers();
+    this.fetchSellers();
   }
 
   loadAdminProfile() {
@@ -35,5 +42,53 @@ export class AdminDashboardComponent {
 
   adminlogout() {
     this.authService.adminlogout();
+  }
+
+  fetchBuyers(){
+    this.adminservice.getAllBuyers().subscribe({
+      next: (allBuyers:any) => {
+        console.info("Buyers fetched successfully:", allBuyers);
+        this.buyers = allBuyers;
+      },
+      error: (err) => {
+        console.error("Error in fetching ", err);
+      }
+    });
+  }
+
+  fetchSellers(){
+    this.adminservice.getAllSellers().subscribe({
+      next: (allSellers:any) => {
+        console.info("Sellers fetched successfully:", allSellers);
+        this.sellers = allSellers;
+      },
+      error: (err) => {
+        console.error("Error in fetching ", err);
+      }
+    });
+  }
+
+  deleteUser(userId:any){
+    this.adminservice.deleteUser(userId).subscribe({
+      next: () => {
+        console.info("User Delted Succesfully");
+        this.fetchBuyers();
+        this.fetchSellers();
+      },
+      error(err) {
+        console.error("Error in fetching ", err);
+      }
+    });
+  }
+
+  fetchSellerProperties(sellerId:any){
+    this.adminservice.fetchSellerProperties(sellerId).subscribe({
+      next: () =>{
+        console.info("Seller Properties Fetched Succesfully");
+      },
+      error(err) {
+        console.error("Error in fetching ", err);
+      }
+    })
   }
 }
