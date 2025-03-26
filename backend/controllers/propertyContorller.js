@@ -51,15 +51,17 @@ export const listProperty = async (req,res) => {
 export const updateProperty = async (req, res) => {
     try {
         const { propertyId } = req.params;
-        const { propertyName, propertyImage, squarefeet, country, state, city, price } = req.body;
+        const { propertyName, propertyImage, squarefeet, state, city, price } = req.body;
         let updatedFields = { 
             propertyName, 
             propertyImage: {  data: req.file.buffer, contentType: req.file.mimetype },  
-            popertyDimension: { squarefeet },
-            location: { country, state, city }, 
+            'popertyDimension.squarefeet': squarefeet ,
+            'location.country': "India",
+            'location.state': state,
+            'location.city': city,
             price 
         };
-
+        
         const updatedProperty = await Property.findByIdAndUpdate(
             propertyId,
             { $set: updatedFields },
