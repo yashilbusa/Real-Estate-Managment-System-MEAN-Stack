@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import mongoose from 'mongoose';
 import User from '../models/User.js';
 
 const userMiddleware = async (req, res, next) => {
@@ -8,15 +7,19 @@ const userMiddleware = async (req, res, next) => {
         if (!token) return res.status(401).json({ error: 'No token provided' });
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-
         const user = await User.findById(decoded.ownerId);
-        
+
         if (!user) return res.status(401).json({ error: 'Authentication failed' });
 
-        req.user = {  ownerId: user._id.toString(), ownerName: user.name }; 
+        req.user = { 
+            ownerId: user._id.toString(), 
+            ownerName: user.name,
+            email: user.email 
+        }; 
         req.token = token;
+        next();
     } catch (error) {
-        res.status(401).json({ error: 'Please authenticate' });
+        res.status(401).json({ error: 'Invalid or expired token' });
     }
 };
 

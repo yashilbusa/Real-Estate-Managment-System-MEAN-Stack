@@ -24,9 +24,9 @@ export class AuthService {
     return this.http.post<{ token: string; role: string }>(`${this.apiUrl}/login`, { email, password });
   }  
   
-  getUserProfile(): Observable<any> {
+  getUserProfile(){
     return this.http.get(`${this.apiUrl}/userProfile`, {
-      headers: { 'Authorization': `Bearer ${ typeof window !== 'undefined' ? localStorage.getItem('token'): '' }` }
+      headers: { 'Authorization': `Bearer ${this.getToken(1)}` }
     });
   }
   
