@@ -33,7 +33,7 @@ export const fetchSellerProperties = async (req,res) => {
     try{
         const { sellerId } = req.params;
 
-        const sellerProperties = await Property.find({ "owner.OwnerId": sellerId });
+        const sellerProperties = await Property.find({ userId: sellerId });
 
         res.status(200).json(sellerProperties);
         // console.info(sellerProperties);
