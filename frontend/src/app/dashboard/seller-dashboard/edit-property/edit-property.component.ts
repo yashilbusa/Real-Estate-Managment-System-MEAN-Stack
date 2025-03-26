@@ -23,11 +23,18 @@ export class EditPropertyComponent {
 
   ngOnInit() {
     this.propertyId = this.route.snapshot.paramMap.get('id');
+
     if (this.propertyId) {
-      this.propertyService.fetchAllProperty().subscribe((p: any) => {
-        this.property = p;
+      this.propertyService.getSellerProperties().subscribe({
+        next: (pdata) => {
+          this.property = pdata;
+        },
+        error: (err) => {
+          console.error("Error updating property:", err);
+        }
       });
     }
+
   }
 
   updateProperty() {

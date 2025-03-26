@@ -1,5 +1,6 @@
 <div class="container">
   <h2>Edit Property</h2>
+  <hr>
   <form (ngSubmit)="updateProperty()">
     <div class="form-group">
       <label for="propertyName">Property Name *</label>
@@ -16,7 +17,9 @@
       <input type="number" id="price" name="price" [(ngModel)]="property.price" class="form-control" required>
     </div>
 
+    <hr>
     <button type="submit" class="btn btn-success">Update Property</button>
+    <br>
     <button type="button" class="btn btn-secondary" routerLink="/seller-dashboard">Cancel</button>
   </form>
 </div>

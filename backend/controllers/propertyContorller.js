@@ -49,19 +49,15 @@ export const listProperty = async (req,res) => {
 export const updateProperty = async (req, res) => {
     try {
         const { propertyId } = req.params;
-        const { propertyName, squarefeet, country, state, city, price } = req.body;
+        const { propertyName, squarefeet, price } = req.body;
 
         if (!propertyId) {
             return res.status(400).json({ message: 'Property ID is required' });
         }
 
-        // Prepare update object
         const updatedFields = {};
         if (propertyName) updatedFields.propertyName = propertyName;
         if (squarefeet) updatedFields.squarefeet = squarefeet; 
-        if (country || state || city) {
-            updatedFields.location = { country, state, city };
-        }
         if (price) updatedFields.price = price;
 
         const updatedProperty = await Property.findByIdAndUpdate(
