@@ -29,6 +29,12 @@ export class AuthService {
       headers: { 'Authorization': `Bearer ${this.getToken(1)}` }
     });
   }
+
+  getAdminProfile(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/adminProfile`, {
+      headers: { 'Authorization': `Bearer ${this.getToken(0)}` }
+    });
+  }
   
   logout() {
     if (typeof window !== 'undefined') {
