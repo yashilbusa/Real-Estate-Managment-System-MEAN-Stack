@@ -1,4 +1,5 @@
 import User from '../models/User.js';
+import Property from '../models/Property.js';
 
 export const getAllBuyers = async (req, res) => {
     try {
@@ -29,6 +30,15 @@ export const deleteUser = async (req, res) => {
 };
 
 export const fetchSellerProperties = async (req,res) => {
-    
+    try{
+        const sellerId = req.params;
+
+        const sellerProperties = await Property.find({ _id: sellerId });
+
+        res.status(200).json(sellerProperties);
+
+    } catch (error){
+        res.status(500).json({ message: 'Server error', error: error.message });  
+    }
 }
 

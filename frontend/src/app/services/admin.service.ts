@@ -31,7 +31,7 @@ export class AdminService {
   }
 
   deleteUser(userId:any){
-    return this.http.get(`${this.apiUrl}/deleteUser/${userId}`);
+    return this.http.delete(`${this.apiUrl}/deleteUser/${userId}`);
   }
 
   fetchSellerProperties(sellerId:any){
