@@ -19,6 +19,7 @@ export class AdminDashboardComponent {
 
   buyers: any[] = [];
   sellers: any[] = [];
+  sellerProperties: any[] =[];
 
   constructor(private authService: AuthService, private router: Router, private cookie:CookieService, private adminservice: AdminService) {}
 
@@ -83,8 +84,9 @@ export class AdminDashboardComponent {
 
   fetchSellerProperties(sellerId:any){
     this.adminservice.fetchSellerProperties(sellerId).subscribe({
-      next: () =>{
-        console.info("Seller Properties Fetched Succesfully");
+      next: (sp:any) =>{
+        this.sellerProperties = sp;
+        console.info("Seller Properties Fetched Succesfully",sp);
       },
       error(err) {
         console.error("Error in fetching ", err);
