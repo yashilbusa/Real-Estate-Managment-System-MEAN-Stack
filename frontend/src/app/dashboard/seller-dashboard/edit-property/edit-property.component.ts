@@ -7,21 +7,20 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-edit-property',
   standalone: true,
-  imports: [CommonModule,FormsModule,RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './edit-property.component.html',
   styleUrl: './edit-property.component.css'
 })
 export class EditPropertyComponent {
-
   property: any = {
     propertyName: '',
     squarefeet: '',
     price: ''
-  }; 
-  propertyId:any;
+  };
+  propertyId: any;
 
-  constructor( private route: ActivatedRoute, private router: Router, private propertyService: PropertyService) {}
-  
+  constructor(private route: ActivatedRoute, private router: Router, private propertyService: PropertyService) {}
+
   ngOnInit() {
     this.propertyId = this.route.snapshot.paramMap.get('id');
     if (this.propertyId) {
@@ -43,3 +42,4 @@ export class EditPropertyComponent {
     });
   }
 }
+

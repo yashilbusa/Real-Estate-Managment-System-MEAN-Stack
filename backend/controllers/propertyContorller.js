@@ -55,26 +55,26 @@ export const updateProperty = async (req, res) => {
             return res.status(400).json({ message: 'Property ID is required' });
         }
 
+        // Prepare update object
         const updatedFields = {};
-
         if (propertyName) updatedFields.propertyName = propertyName;
-        if (squarefeet) updatedFields.popertyDimension = { squarefeet };
+        if (squarefeet) updatedFields.squarefeet = squarefeet; 
         if (country || state || city) {
-            updatedFields.location = {
-                country: country,
-                state: state,
-                city: city,
-            };
+            updatedFields.location = { country, state, city };
         }
         if (price) updatedFields.price = price;
 
-        const updatedProperty = await Property.updateOne(
-            { _id: propertyId },
+        const updatedProperty = await Property.findByIdAndUpdate(
+            propertyId,
             { $set: updatedFields },
-            { new: true }
+            { new: true } 
         );
 
-        res.status(200).json({ message: 'Property updated successfully', UpdatedProperty: updatedProperty });
+        if (!updatedProperty) {
+            return res.status(404).json({ message: 'Property not found' });
+        }
+
+        res.status(200).json({ message: 'Property updated successfully', updatedProperty });
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });
     }

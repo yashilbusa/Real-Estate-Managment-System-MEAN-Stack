@@ -11,11 +11,15 @@ const userMiddleware = async (req, res, next) => {
 
         if (!user) return res.status(401).json({ error: 'Authentication failed' });
 
+<<<<<<< HEAD
         req.user = { 
             ownerId: user._id.toString(), 
             ownerName: user.name,
             email: user.email 
         }; 
+=======
+        req.user = {  ownerId: user._id.toString(), ownerName: user.name, email: user.email }; 
+>>>>>>> 368ffe0968e6368bdf11e91d68ba901e17ac8a56
         req.token = token;
         next();
     } catch (error) {
