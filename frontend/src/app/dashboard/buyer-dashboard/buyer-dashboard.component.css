@@ -10,3 +10,18 @@
     font-size: 14px;
     color: #333;
   }
+
+  .logout-button {
+    width: 130px;
+    height: 40px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center; 
+    background: red;
+    color: white;
+  }

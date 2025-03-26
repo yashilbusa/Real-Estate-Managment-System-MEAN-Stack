@@ -1,14 +1,11 @@
-<p>buyer-dashboard works!</p>
-<br>
-<button (click)="logout()">Logout</button>
+<button class="logout-button" (click)="logout()">Logout</button>
 <br>
 <div class="user-profile">
   <p>Welcome, {{ user.name }}</p>
   <p>Email: {{ user.email }}</p>
 </div>
-
+<br>
 <hr>
-
 <div>
   <input type="text" placeholder="Enter City" [(ngModel)]="searchCriteria.city">
   <input type="number" placeholder="Min Price" [(ngModel)]="searchCriteria.minPrice">
