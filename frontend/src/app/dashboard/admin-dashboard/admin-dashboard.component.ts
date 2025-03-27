@@ -73,20 +73,22 @@ export class AdminDashboardComponent {
   }
 
   deleteUser(userId:any){
-    this.adminservice.deleteUser(userId).subscribe({
-      next: () => {
-        console.info("User Delted Succesfully");
-        this.fetchBuyers();
-        this.fetchSellers();
+    if (confirm("Are you sure you want to delete User?")) {
+      this.adminservice.deleteUser(userId).subscribe({
+        next: () => {
+          console.info("User Delted Succesfully");
+          this.fetchBuyers();
+          this.fetchSellers();
 
-        // if(this.selectedSellerId == userId){
-        //   this.sellerProperties = [];
-        // }
-      },
-      error(err) {
-        console.error("Error in deleting ", err);
-      }
-    });
+          if(this.selectedSellerId == userId){
+            this.sellerProperties = [];
+          }
+        },
+        error(err) {
+          console.error("Error in deleting ", err);
+        }
+      });
+    }
   }
 
   fetchSellerProperties(sellerId:any){
@@ -104,14 +106,16 @@ export class AdminDashboardComponent {
 
   deleteProperty(propertyId:any){
     this.selectedPropId = propertyId;
-    this.adminservice.deleteSellerProperty(propertyId).subscribe({
-      next: () =>{
-        console.info("Property Deleted");
-        this.fetchSellerProperties(this.selectedSellerId);
-      },
-      error(err) {
-        console.error("Error in Deleting", err);
-      }
-    })
+    if (confirm("Are you sure you want to delete User?")) {
+      this.adminservice.deleteSellerProperty(propertyId).subscribe({
+        next: () =>{
+          console.info("Property Deleted");
+          this.fetchSellerProperties(this.selectedSellerId);
+        },
+        error(err) {
+          console.error("Error in Deleting", err);
+        }
+      })
+    }
   }
 }
