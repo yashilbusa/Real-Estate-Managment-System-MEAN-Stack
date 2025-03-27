@@ -78,5 +78,8 @@ export class BuyerDashboardComponent {
           }
         });
       }
+      else{
+        alert('You Can Not Post Another Request, You Already Post Request For This Property  ');
+      }
     }
 }
