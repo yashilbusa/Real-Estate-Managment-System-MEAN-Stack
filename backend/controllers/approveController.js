@@ -2,8 +2,9 @@ import ApproveRequest from "../models/ApproveRequest.js";
 
 export const buyPropertyRequest = async (req,res) =>{
     try {
-        const { buyerId, sellerId, status } = req.body;
+        const { propertyId, buyerId, sellerId, status } = req.body;
         const request = new ApproveRequest({
+            propertyId,
             buyerId,
             sellerId,
             status
