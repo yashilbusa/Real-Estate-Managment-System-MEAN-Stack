@@ -70,6 +70,7 @@ export class BuyerDashboardComponent {
       next: () =>{
         alert('Your Buying Request is Sent to Seller!!!');
         console.info('Request is Sent to Seller');
+        this.reqFlag = false;
       },
       error: (err) => {
         console.error("Error in requesting property:", err);

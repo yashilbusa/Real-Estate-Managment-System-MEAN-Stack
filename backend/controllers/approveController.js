@@ -12,10 +12,7 @@ export const buyPropertyRequest = async (req,res) =>{
             })
             await request.save();
         }
-
-        // reqFlag = false;
-        res.json({request});
-        // res.json({ message: "Request Send from Backend"});
+        res.json({ message: "Request Send from Backend"});
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });  
     }
