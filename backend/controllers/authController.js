@@ -65,7 +65,8 @@ export const getProfile = async (req,res) => {
     try {
         res.status(200).json({
             name: req.user.ownerName,
-            email: req.user.email
+            email: req.user.email,
+            id: req.user.ownerId
         });
     } catch (error) {
         console.error("Error fetching user profile:", error);
