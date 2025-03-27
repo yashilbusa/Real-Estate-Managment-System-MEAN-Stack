@@ -8,6 +8,8 @@ mongoose.set('debug',true);
 import authRoutes from './routes/authRoutes.js';
 import propertyRoutes from './routes/propertyRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
+import approveRoutes from './routes/approveRoutes.js';
+
 
 
 dotenv.config();
@@ -26,6 +28,8 @@ mongoose.connect(process.env.MONGO_URL)
 app.use("/", authRoutes);
 app.use("/", propertyRoutes);
 app.use("/", adminRoutes);
+app.use("/", approveRoutes);
+
 
 
 

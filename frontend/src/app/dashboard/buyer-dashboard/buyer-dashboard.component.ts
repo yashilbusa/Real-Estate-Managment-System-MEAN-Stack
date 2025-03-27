@@ -64,7 +64,14 @@ export class BuyerDashboardComponent {
     })
   }
 
-  buyProperty(){
-    
+  buyProperty(sellerId:any){
+    this.property.reqBuyProperty(sellerId).subscribe({
+      next: () =>{
+        console.info('Request is Sent to Seller');
+      },
+      error: (err) => {
+        console.error("Error in requesting property:", err);
+      }
+    });
   }
 }

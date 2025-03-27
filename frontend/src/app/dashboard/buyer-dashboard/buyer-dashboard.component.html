@@ -27,7 +27,7 @@
     <img [src]="property.propertyImage" alt="Property Image" width="200">
   </div>  
 
-  <button>Buy Property</button>
+  <button (click)="buyProperty(property.owner.ownerId)" >Buy Property</button>
   
   <hr> 
 </div>

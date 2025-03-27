@@ -40,4 +40,8 @@ export class PropertyService {
   getSellerProperties(){
     return this.http.get(`${this.apiUrl}/getSellerProperties`, this.getHeaders());
   }
+
+  reqBuyProperty(sellerId:any){
+    return this.http.post(`${this.apiUrl}/buyRequest`, sellerId, this.getHeaders());
+  }
 }
