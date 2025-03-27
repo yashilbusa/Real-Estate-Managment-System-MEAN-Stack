@@ -66,15 +66,17 @@ export class BuyerDashboardComponent {
   }
 
   buyProperty(sellerId:any,buyerId:any,propertyId:any){
-    this.property.reqBuyProperty(sellerId,buyerId,propertyId,this.reqFlag).subscribe({
-      next: () =>{
-        alert('Your Buying Request is Sent to Seller!!!');
-        console.info('Request is Sent to Seller');
-        this.reqFlag = false;
-      },
-      error: (err) => {
-        console.error("Error in requesting property:", err);
+    if(this.reqFlag == true) {
+        this.property.reqBuyProperty(sellerId,buyerId,propertyId,this.reqFlag).subscribe({
+          next: () =>{
+            alert('Your Buying Request is Sent to Seller!!!');
+            console.info('Request is Sent to Seller');
+            this.reqFlag = false;
+          },
+          error: (err) => {
+            console.error("Error in requesting property:", err);
+          }
+        });
       }
-    });
-  }
+    }
 }
