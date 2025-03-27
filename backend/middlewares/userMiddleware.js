@@ -14,7 +14,7 @@ export const userMiddleware = async (req, res, next) => {
         req.user = { 
             ownerId: user._id.toString(), 
             ownerName: user.name,
-            email: user.email 
+            email: user.email,
         }; 
         req.token = token;
         next();
