@@ -57,8 +57,8 @@ export class BuyerDashboardComponent {
       const matchCity = this.searchCriteria.city ? p.location.city.toLowerCase().includes(this.searchCriteria.city.toLowerCase()) : true;
       const matchMinPrice =  this.searchCriteria.minPrice ? p.price >= this.searchCriteria.minPrice : true;
       const matchMaxPrice =  this.searchCriteria.maxPrice ? p.price <= this.searchCriteria.maxPrice : true;
-      const matchMinSize = this.searchCriteria.minSize ? p.propertyDimension.squarefeet >= this.searchCriteria.minSize : true;
-      const matchMaxSize = this.searchCriteria.maxSize ? p.propertyDimension.squarefeet <= this.searchCriteria.maxSize : true;
+      const matchMinSize = this.searchCriteria.minSize ? p.popertyDimension.squarefeet >= this.searchCriteria.minSize : true;
+      const matchMaxSize = this.searchCriteria.maxSize ? p.popertyDimension.squarefeet <= this.searchCriteria.maxSize : true;
 
       return matchCity && matchMinPrice && matchMaxPrice && matchMinSize && matchMaxSize;
     })

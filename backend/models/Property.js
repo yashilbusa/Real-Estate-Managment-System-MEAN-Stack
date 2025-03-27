@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const propertySchema = new mongoose.Schema({
     propertyName: { type:String, required: true },
     propertyImage: { data: Buffer, contentType: String },
-    propertyDimension: { 
+    popertyDimension: { 
         squarefeet: { type: Number, required: true }
     },
     location: { 

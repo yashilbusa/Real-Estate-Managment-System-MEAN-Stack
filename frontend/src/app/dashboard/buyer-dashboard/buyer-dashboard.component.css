@@ -1,27 +1,207 @@
+/* Reset defaults */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f4f6f9;
+  padding: 20px;
+  color: #333;
+}
+
+/* Logout Button */
+.logout-button {
+  padding: 10px 20px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.logout-button:hover {
+  background-color: #e63939;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* User Profile */
 .user-profile {
-    position: absolute;
-    height: 70px;
-    padding: 10px;
-    top: 10px;
-    right: 20px;
-    background-color: #f1f1f1;
-    border-radius: 8px;
-    text-align: center;
-    font-size: 14px;
-    color: #333;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+  border-left: 4px solid #1a73e8;
+}
+
+.user-profile p {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+/* Search Bar */
+div[ngModel] {
+  display: flex;
+  gap: 15px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+input[type="text"],
+input[type="number"] {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+  flex: 1;
+  min-width: 150px;
+}
+
+input[type="text"]::placeholder,
+input[type="number"]::placeholder {
+  color: #999;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+  border-color: #1a73e8;
+  box-shadow: 0 0 5px rgba(26, 115, 232, 0.2);
+}
+
+button[ng-reflect-click="filterProperties()"] {
+  padding: 10px 20px;
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+button[ng-reflect-click="filterProperties()"]:hover {
+  background-color: #1557b0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* HR styling */
+hr {
+  border: 0;
+  height: 1px;
+  background: #e0e0e0;
+  margin: 30px 0;
+}
+
+/* Property Cards */
+.property-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+
+.property-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.property-card h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #1a73e8;
+}
+
+.property-card p {
+  font-size: 14px;
+  margin: 5px 0;
+  color: #555;
+}
+
+.property-card p b {
+  color: #333;
+}
+
+.property-card img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  border-radius: 5px;
+  margin-top: 10px;
+  object-fit: cover;
+}
+
+/* Grid Layout for Properties */
+div[ngFor] {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  div[ngFor] {
+      grid-template-columns: repeat(2, 1fr);
+  }
+
+  input[type="text"],
+  input[type="number"] {
+      min-width: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  div[ngFor] {
+      grid-template-columns: 1fr;
+  }
+
+  div[ngModel] {
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  input[type="text"],
+  input[type="number"] {
+      min-width: 100%;
   }
 
   .logout-button {
-    width: 130px;
-    height: 40px;
-    font-size: 14px;
-    font-weight: bold;
-    margin-top: 10px;
-    margin-left: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center; 
-    background: red;
-    color: white;
+      width: 100%;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
   }
+
+  .user-profile {
+      padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+      padding: 15px;
+  }
+
+  .property-card h2 {
+      font-size: 16px;
+  }
+
+  .property-card p {
+      font-size: 13px;
+  }
+
+  .user-profile p {
+      font-size: 14px;
+  }
+}
