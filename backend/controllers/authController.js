@@ -64,6 +64,7 @@ export const login = async (req, res) => {
 export const getProfile = async (req,res) => {
     try {
         res.status(200).json({
+            id: req.user._id,
             name: req.user.ownerName,
             email: req.user.email
         });
