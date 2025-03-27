@@ -20,7 +20,9 @@ export class AdminDashboardComponent {
   buyers: any[] = [];
   sellers: any[] = [];
   sellerProperties: any[] =[];
-  selectedSellerId: string = ';'
+  selectedSellerId: string = '';
+  selectedPropId: string = '';
+
 
   constructor(private authService: AuthService, private router: Router, private cookie:CookieService, private adminservice: AdminService) {}
 
@@ -96,6 +98,19 @@ export class AdminDashboardComponent {
       },
       error(err) {
         console.error("Error in fetching ", err);
+      }
+    })
+  }
+
+  deleteProperty(propertyId:any){
+    this.selectedPropId = propertyId;
+    this.adminservice.deleteSellerProperty(propertyId).subscribe({
+      next: () =>{
+        console.info("Property Deleted");
+        this.fetchSellerProperties(this.selectedSellerId);
+      },
+      error(err) {
+        console.error("Error in Deleting", err);
       }
     })
   }

@@ -41,3 +41,18 @@ export const fetchSellerProperties = async (req,res) => {
         res.status(500).json({ message: 'Server error', error: error.message });  
     }
 }
+
+export const deleteProperty = async (req,res) => {
+    try{
+        const { propertyId } = req.params;
+
+        if (!propertyId) {
+            return res.status(400).json({ message: 'Property ID is required' });
+        }
+
+        await Property.deleteOne({ _id: propertyId});
+        res.status(200).json({ message: 'Property Deleted successfully'});
+    } catch (error){
+        res.status(500).json({ message: 'Server error', error: error.message });  
+    }
+}

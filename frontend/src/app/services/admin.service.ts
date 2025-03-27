@@ -37,5 +37,9 @@ export class AdminService {
   fetchSellerProperties(sellerId:any){
     return this.http.get(`${this.apiUrl}/fetchSellerProperties/${sellerId}`, this.getHeaders());
   }
+
+  deleteSellerProperty(propId:any){
+    return this.http.delete(`${this.apiUrl}/deleteProperty/${propId}`, this.getHeaders());
+  }
 }
 
