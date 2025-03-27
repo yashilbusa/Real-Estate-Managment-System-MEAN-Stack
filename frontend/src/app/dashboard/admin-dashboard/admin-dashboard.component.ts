@@ -79,12 +79,12 @@ export class AdminDashboardComponent {
         this.fetchBuyers();
         this.fetchSellers();
 
-        if(this.selectedSellerId == userId){
-          this.sellerProperties = [];
-        }
+        // if(this.selectedSellerId == userId){
+        //   this.sellerProperties = [];
+        // }
       },
       error(err) {
-        console.error("Error in fetching ", err);
+        console.error("Error in deleting ", err);
       }
     });
   }

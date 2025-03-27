@@ -13,7 +13,7 @@ body {
 }
 
 /* Logout Button */
-.logout-button {
+.logout-button, button {
   padding: 10px 20px;
   background-color: #ff4d4d;
   color: white;
@@ -24,11 +24,18 @@ body {
   transition: all 0.3s ease;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+  margin-top: 10px;
+  margin-left: 10px;
 }
 
-.logout-button:hover {
+.logout-button:hover, button {
   background-color: #e63939;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+button{
+  margin-top: 0px;
+  margin-left: 0px;
 }
 
 /* User Profile */
