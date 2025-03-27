@@ -63,4 +63,8 @@ export class BuyerDashboardComponent {
       return matchCity && matchMinPrice && matchMaxPrice && matchMinSize && matchMaxSize;
     })
   }
+
+  buyProperty(){
+    
+  }
 }
