@@ -8,7 +8,7 @@ export const adminMiddleware = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
     if (decoded.role !== 'admin') {
       return res.status(403).json({ message: 'Admin access required' });
     }

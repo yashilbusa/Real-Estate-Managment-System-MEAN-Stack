@@ -36,7 +36,7 @@ export const fetchSellerProperties = async (req,res) => {
         const sellerProperties = await Property.find({ "owner.OwnerId": sellerId });
 
         res.status(200).json(sellerProperties);
-        // console.info(sellerProperties);
+        console.info(sellerProperties);
 
     } catch (error){
         res.status(500).json({ message: 'Server error', error: error.message });  
