@@ -20,6 +20,7 @@ export class AdminDashboardComponent {
   buyers: any[] = [];
   sellers: any[] = [];
   sellerProperties: any[] =[];
+  selectedSellerId: string = ';'
 
   constructor(private authService: AuthService, private router: Router, private cookie:CookieService, private adminservice: AdminService) {}
 
@@ -75,6 +76,10 @@ export class AdminDashboardComponent {
         console.info("User Delted Succesfully");
         this.fetchBuyers();
         this.fetchSellers();
+
+        if(this.selectedSellerId == userId){
+          this.sellerProperties = [];
+        }
       },
       error(err) {
         console.error("Error in fetching ", err);
@@ -83,6 +88,7 @@ export class AdminDashboardComponent {
   }
 
   fetchSellerProperties(sellerId:any){
+    this.selectedSellerId = sellerId;
     this.adminservice.fetchSellerProperties(sellerId).subscribe({
       next: (sp:any) =>{
         this.sellerProperties = sp;

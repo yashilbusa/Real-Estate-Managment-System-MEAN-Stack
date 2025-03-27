@@ -1,4 +1,3 @@
-<p>admin-dashboard works!</p>
 <button class="logout-button" (click)="adminlogout()">Logout</button>
 
 <div class="user-profile">
@@ -35,5 +34,22 @@
     <td>{{ seller.email }}</td>
     <td><button (click)="fetchSellerProperties(seller._id)">Get Properties</button></td>
     <td><button (click)="deleteUser(seller._id)">Delete User</button></td>
+  </tr>
+</table>
+
+<hr>
+<h2>Seller Properties</h2>
+<table>
+  <tr>
+    <th>Property Name</th>
+    <th>Location</th>
+    <th>Price</th>
+    <th>Owner</th>
+  </tr>
+  <tr *ngFor="let property of sellerProperties">
+    <td>{{ property.propertyName }}</td>
+    <td>{{ property.location }}</td>
+    <td>{{ property.price }}</td>
+    <td>{{ property.owner.OwnerName }}</td>
   </tr>
 </table>
