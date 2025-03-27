@@ -42,4 +42,3 @@ export class AdminService {
     return this.http.delete(`${this.apiUrl}/deleteProperty/${propId}`, this.getHeaders());
   }
 }
-
