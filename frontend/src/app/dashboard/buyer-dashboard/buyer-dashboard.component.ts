@@ -64,8 +64,8 @@ export class BuyerDashboardComponent {
     })
   }
 
-  buyProperty(sellerId:any,buyerId:any){
-    this.property.reqBuyProperty(sellerId,buyerId).subscribe({
+  buyProperty(sellerId:any,buyerId:any,propertyId:any){
+    this.property.reqBuyProperty(sellerId,buyerId,propertyId).subscribe({
       next: () =>{
         console.info('Request is Sent to Seller');
       },
