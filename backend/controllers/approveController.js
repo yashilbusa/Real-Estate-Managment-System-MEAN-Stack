@@ -2,15 +2,18 @@ import ApproveRequest from "../models/ApproveRequest.js";
 
 export const buyPropertyRequest = async (req,res) =>{
     try {
-        const { propertyId, buyerId, sellerId, status } = req.body;
-        const request = new ApproveRequest({
-            propertyId,
-            buyerId,
-            sellerId,
-            status
-        })
+        const { propertyId, buyerId, sellerId, status, reqFlag } = req.body;
+        if(reqFlag === true){
+            const request = new ApproveRequest({
+                propertyId,
+                buyerId,
+                sellerId,
+                status,
+            })
+            await request.save();
+        }
 
-        await request.save();
+        // reqFlag = false;
         res.json({request});
         // res.json({ message: "Request Send from Backend"});
     } catch (error) {

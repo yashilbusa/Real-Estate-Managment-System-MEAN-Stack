@@ -20,6 +20,7 @@ export class BuyerDashboardComponent {
   searchCriteria = { city: '', minPrice: null, maxPrice: null, minSize: null, maxSize: null };
 
   user: any = {};
+  reqFlag: any = true;
 
   constructor(private authService: AuthService, private router: Router, private property: PropertyService) {}
 
@@ -65,8 +66,9 @@ export class BuyerDashboardComponent {
   }
 
   buyProperty(sellerId:any,buyerId:any,propertyId:any){
-    this.property.reqBuyProperty(sellerId,buyerId,propertyId).subscribe({
+    this.property.reqBuyProperty(sellerId,buyerId,propertyId,this.reqFlag).subscribe({
       next: () =>{
+        alert('Your Buying Request is Sent to Seller!!!');
         console.info('Request is Sent to Seller');
       },
       error: (err) => {
