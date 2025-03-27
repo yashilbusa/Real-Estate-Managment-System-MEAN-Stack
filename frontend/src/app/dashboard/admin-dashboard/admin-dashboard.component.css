@@ -1,27 +1,187 @@
+/* Reset defaults */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f7f9fc;
+  color: #333333;
+  padding: 20px;
+}
+
+/* Logout Button */
+.logout-button {
+  padding: 12px 25px;
+  background-color: #ff4d4d;
+  margin-top: 10px;
+  margin-left: 10px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 25px;
+}
+
+.logout-button:hover {
+  background-color: #e63939;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* User Profile */
 .user-profile {
-    position: absolute;
-    height: 70px;
-    padding: 10px;
-    top: 10px;
-    right: 20px;
-    background-color: #f1f1f1;
-    border-radius: 8px;
-    text-align: center;
-    font-size: 14px;
-    color: #333;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid #4a90e2;
+}
+
+.user-profile p {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+th, td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ebedf0;
+}
+
+th {
+  background-color: #4a90e2;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+tr:hover {
+  background-color: #f9fafb;
+}
+
+/* Buttons */
+button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Specific button styles */
+button[ng-reflect-click^="deleteUser"] {
+  background-color: #ff4d4d;
+  color: white;
+  margin: 0 5px;
+}
+
+button[ng-reflect-click^="fetchSellerProperties"] {
+  background-color: #2ecc71;
+  color: white;
+  margin: 0 5px;
+}
+
+/* HR styling */
+hr {
+  border: 0;
+  height: 1px;
+  background: #ebedf0;
+  margin: 30px 0;
+}
+
+/* Headings */
+h2 {
+  color: #333333;
+  margin-bottom: 20px;
+  font-weight: 600;
+  position: relative;
+  padding-left: 15px;
+}
+
+h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 20px;
+  background-color: #4a90e2;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  table {
+      display: block;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+  }
+
+  th, td {
+      min-width: 120px;
+  }
+
+  .user-profile {
+      padding: 15px;
+  }
+
+  button {
+      padding: 7px 14px;
+      font-size: 14px;
   }
 
   .logout-button {
-    width: 130px;
-    height: 40px;
-    font-size: 14px;
-    font-weight: bold;
-    margin-top: 10px;
-    margin-left: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center; 
-    background: red;
-    color: white;
+      width: 100%;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
   }
+}
+
+@media (max-width: 480px) {
+  body {
+      padding: 15px;
+  }
+
+  th, td {
+      padding: 12px;
+      font-size: 13px;
+  }
+
+  h2 {
+      font-size: 1.2em;
+  }
+
+  .user-profile p {
+      font-size: 14px;
+  }
+
+  h2::before {
+      height: 16px;
+  }
+}

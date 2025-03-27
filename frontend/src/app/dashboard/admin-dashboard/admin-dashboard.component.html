@@ -45,11 +45,13 @@
     <th>Location</th>
     <th>Price</th>
     <th>Owner</th>
+    <th>Action</th>
   </tr>
   <tr *ngFor="let property of sellerProperties">
     <td>{{ property.propertyName }}</td>
     <td>{{ property.location.city }}</td>
     <td>{{ property.price }}</td>
     <td>{{ property.owner.ownerName }}</td>
+    <td><button (click)="deleteUser(property._id)">Delete Property</button></td>
   </tr>
 </table>
