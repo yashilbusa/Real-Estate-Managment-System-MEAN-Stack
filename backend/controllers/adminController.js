@@ -20,7 +20,7 @@ export const getAllSellers = async (req, res) => {
 };
 
 export const deleteUser = async (req, res) => {
-    try {
+    try {   
         const { userId } = req.params;
         await User.findByIdAndDelete(userId);
         res.status(200).json({ message: 'User deleted successfully' });
@@ -31,7 +31,7 @@ export const deleteUser = async (req, res) => {
 
 export const fetchSellerProperties = async (req,res) => {
     try{
-        const sellerId = req.user.sellerId;
+        const { sellerId } = req.params;
 
         const sellerProperties = await Property.find({ 'owner.ownerId': sellerId });
 

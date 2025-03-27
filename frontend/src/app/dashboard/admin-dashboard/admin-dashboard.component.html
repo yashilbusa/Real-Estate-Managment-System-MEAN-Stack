@@ -48,8 +48,8 @@
   </tr>
   <tr *ngFor="let property of sellerProperties">
     <td>{{ property.propertyName }}</td>
-    <td>{{ property.location }}</td>
+    <td>{{ property.location.city }}</td>
     <td>{{ property.price }}</td>
-    <td>{{ property.owner.OwnerName }}</td>
+    <td>{{ property.owner.ownerName }}</td>
   </tr>
 </table>
