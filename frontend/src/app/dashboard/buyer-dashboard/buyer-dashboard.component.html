@@ -19,7 +19,7 @@
 <div *ngFor="let property of fProperties; let i = index" class="property-card">
   <h2><b>{{ i + 1 }}. {{ property.propertyName }}</b></h2>
   <p><b>Location:</b> {{ property.location.city }}, {{ property.location.state }}, {{ property.location.country }}</p>
-  <p><b>Dimension:</b> {{ property.popertyDimension.squarefeet }} sqft</p>
+  <p><b>Dimension:</b> {{ property.propertyDimension.squarefeet }} sqft</p>
   <p><b>Price:</b> ₹{{ property.price }}</p>
   <p><b>Owner:</b> {{ property.owner?.ownerName || 'Unknown Owner' }}</p>
   

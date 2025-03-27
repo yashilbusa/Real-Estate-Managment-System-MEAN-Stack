@@ -35,7 +35,7 @@ export class AdminService {
   }
 
   fetchSellerProperties(sellerId:any){
-    return this.http.get(`${this.apiUrl}/fetchSellerProperties/${sellerId}`);
+    return this.http.get(`${this.apiUrl}/fetchSellerProperties/${sellerId}`, this.getHeaders());
   }
 }
 

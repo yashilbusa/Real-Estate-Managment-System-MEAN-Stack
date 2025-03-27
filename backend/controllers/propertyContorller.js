@@ -33,7 +33,7 @@ export const listProperty = async (req,res) => {
         const newProperty = new Property({
             propertyName,
             propertyImage: {  data: req.file.buffer, contentType: req.file.mimetype },  
-            popertyDimension: { squarefeet },
+            propertyDimension: { squarefeet },
             location: { country, state, city },
             price,
             owner: { ownerId: req.user.ownerId, ownerName: req.user.ownerName }
@@ -55,7 +55,7 @@ export const updateProperty = async (req, res) => {
         let updatedFields = { 
             propertyName, 
             propertyImage: {  data: req.file.buffer, contentType: req.file.mimetype },  
-            'popertyDimension.squarefeet': squarefeet ,
+            'propertyDimension.squarefeet': squarefeet ,
             'location.country': "India",
             'location.state': state,
             'location.city': city,
