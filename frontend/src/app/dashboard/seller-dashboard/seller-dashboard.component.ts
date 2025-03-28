@@ -88,11 +88,11 @@ export class SellerDashboardComponent {
     this.propertyService.getSellerBuyRequests(this.user.id).subscribe({
       next: (requests:any) =>{
         this.buyRequests = requests;
-        // console.info(this.user.id);
+        console.info(this.user.id);
         console.info("Buy Requests are:",this.buyRequests);
       },
       error: (error) =>{
-        // console.info(this.user.id);
+        console.info(this.user.id);
         console.info("Error in fetching requests:",error);
       }
     })

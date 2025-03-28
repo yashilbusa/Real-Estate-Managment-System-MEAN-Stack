@@ -23,14 +23,14 @@ export const buyPropertyRequest = async (req,res) =>{
 // Get Seller Buy Request
 export const getSellerBuyRequests = async (req,res) => {
     try {
-        const { sellerId }  = req.params.sellerId;
-        // const sellerId = "67e24ace82a18d9807132b4f";
+        // const {sellerId}  = req.params;
+        // // const sellerId = "67e24ace82a18d9807132b4f";
 
         // console.info(sellerId);
 
-        const buyRequest = await ApproveRequest.find({
-            sellerId: sellerId
-        }).populate('propertyId', 'propertyName', 'price', 'buyerId', 'name', 'email');
+        const buyRequest = await ApproveRequest.find();
+
+        // const buyRequest = await ApproveRequest.find({ sellerId: sellerId});
 
         res.json(buyRequest);
         
@@ -48,7 +48,7 @@ export const updateReqStatus = async (req,res) => {
         const updatedRequest = await ApproveRequest.findOneAndUpdate(
             { _id:reqId },
             { $set : { status:status }}
-        ).populate('propertyId', 'propertyName', 'price', 'buyerId', 'name', 'email');
+        )
     }
    } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });  
