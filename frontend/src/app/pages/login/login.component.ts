@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { GoogleSignInService } from '../../services/google-sign-in.service';
+// import { GoogleSigninService } from '../../services/google-sign-in.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,7 @@ export class LoginComponent {
   email = '';
   password = '';
 
-  constructor(private authService: AuthService, private router: Router,private cookie:CookieService, private gSignApi :GoogleSignInService) {}
+  constructor(private authService: AuthService, private router: Router,private cookie:CookieService) {}
 
   login() {
     this.authService.login(this.email, this.password).subscribe({
@@ -54,8 +54,7 @@ export class LoginComponent {
     }
   }
 
-  signInWithGoogle(){
-    this.gSignApi.signIn();
-  }
-
+  // signInWithGoogle(){
+  //   this.gSignApi.signIn();
+  // }
 }
