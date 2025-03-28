@@ -23,12 +23,12 @@ export const buyPropertyRequest = async (req,res) =>{
 // Get Seller Buy Request
 export const getSellerBuyRequests = async (req,res) => {
     try {
-        // const { sellerId }  = req.params.sellerId;
+        const { sellerId }  = req.params.sellerId;
         // console.info(sellerId);
 
-        // const buyRequest = await ApproveRequest.find({ sellerId: sellerId});
+        const buyRequest = await ApproveRequest.find({ sellerId });
         
-        const buyRequest = await ApproveRequest.find();
+        // const buyRequest = await ApproveRequest.find();
         res.json(buyRequest);
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });  

@@ -100,13 +100,12 @@ export class SellerDashboardComponent {
 
   updateReqStatus(requestId:any,status:any){
     this.propertyService.updateReqStatus(requestId,status).subscribe({
-      next: (response:any) =>{
-        this.getBuyRequests();
+      next: () =>{
         alert("Request Successfully");
+        this.getBuyRequests();
       },
       error: (error) =>{
         console.info("Error in updating request:",error);
-        alert("Failed to Update Status");
       }
     })
   }
