@@ -17,6 +17,7 @@ import { PropertyService } from '../../services/property.service';
 export class SellerDashboardComponent {
   user: any = {};
   properties: any[] = [];
+  buyRequests: any[] = [];
 
   property: any = {
     propertyName: '',
@@ -32,6 +33,7 @@ export class SellerDashboardComponent {
   ngOnInit() {
     this.getSellerProperties();
     this.loadUserProfile();
+    this.getBuyRequests();
   }
 
   loadUserProfile() {
@@ -78,6 +80,32 @@ export class SellerDashboardComponent {
         }
       });
     }
+  }
+
+  getBuyRequests(){
+    this.propertyService.getSellerBuyRequests(this.user._id).subscribe({
+      next: (requests:any) =>{
+        this.buyRequests = requests;
+        console.info("Buy Requests are:",this.buyRequests);
+      },
+      error: (error) =>{
+        // console.info(this.user._id);
+        console.info("Error in fetching requests:",error);
+      }
+    })
+  }
+
+  updateReqStatus(requestId:any,status:any){
+    this.propertyService.updateReqStatus(requestId,status).subscribe({
+      next: (response:any) =>{
+        alert("Request Successfully");
+        this.getBuyRequests();
+      },
+      error: (error) =>{
+        console.info("Error in updating request:",error);
+        alert("Failed to Update Status");
+      }
+    })
   }
 }
   

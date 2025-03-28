@@ -1,3 +1,4 @@
+import ApproveRequest from '../models/ApproveRequest.js';
 import Property from '../models/Property.js';
 
 
@@ -106,3 +107,4 @@ export const getSellerProperties = async (req,res) => {
         res.status(500).json({ message: 'Server error', error: error.message });  
     }
 }
+

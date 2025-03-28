@@ -44,4 +44,12 @@ export class PropertyService {
   reqBuyProperty(sellerId:any,buyerId:any,propertyId:any,reqFlag:any){
     return this.http.post(`${this.apiUrl}/buyRequest`, { sellerId, buyerId, propertyId,reqFlag}, this.getHeaders());
   }
+
+  getSellerBuyRequests(sellerId:any){
+    return this.http.get(`${this.apiUrl}/sellerBuyRequests/${sellerId}`, this.getHeaders());
+  }
+
+  updateReqStatus(requestId:any,status:any){
+    return this.http.put(`${this.apiUrl}/updateRequest/${requestId}`, { status }, this.getHeaders())
+  }
 }

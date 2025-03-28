@@ -38,3 +38,38 @@
   </table>
   <button class="btn btn-primary" (click)="addNewProperty()" routerLink="/add-property">Add New Property</button>
 </div>
+
+<div class="second-container">
+  <h2>Buy Requests</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Property Name</th>
+        <th>Buyer Name</th>
+        <th>Buyer Email</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let req of buyRequests">
+        <td>{{ req.propertyId.propertyName }}</td>
+        <td>{{ req.buyerId.name }}</td>
+        <td>{{ req.buyerId.email }}</td>
+        <td>{{ req.propertyId.price }}</td>
+        <td>{{ req.status }}</td>
+        <td>
+          <div class="task-icons" *ngIf="req.status === 'pending'">
+            <button class="approve" (click)="updateReqStatus(req._id,'approved')">  
+              Approve
+            </button>
+            <button class="reject" (click)="updateReqStatus(req._id, 'rejected')">
+              Reject
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
