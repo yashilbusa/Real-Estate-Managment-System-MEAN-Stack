@@ -34,7 +34,7 @@ export class SellerDashboardComponent {
   ngOnInit() {
     this.getSellerProperties();
     this.loadUserProfile();
-    this.getBuyRequests();
+    // this.getBuyRequests();
   }
 
   loadUserProfile() {
@@ -101,8 +101,8 @@ export class SellerDashboardComponent {
   updateReqStatus(requestId:any,status:any){
     this.propertyService.updateReqStatus(requestId,status).subscribe({
       next: (response:any) =>{
-        alert("Request Successfully");
         this.getBuyRequests();
+        alert("Request Successfully");
       },
       error: (error) =>{
         console.info("Error in updating request:",error);
