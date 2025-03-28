@@ -69,7 +69,7 @@ export const getProfile = async (req,res) => {
             id: req.user.ownerId
         });
     } catch (error) {
-        console.error("Error fetching user profile:", error);
+        console.error("Error fetching user profile:", error );
         res.status(500).json({ error: "Server Error" });
     }
 }
