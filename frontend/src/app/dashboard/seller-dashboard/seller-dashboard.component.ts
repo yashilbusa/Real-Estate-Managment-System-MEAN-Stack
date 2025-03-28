@@ -18,6 +18,7 @@ export class SellerDashboardComponent {
   user: any = {};
   properties: any[] = [];
   buyRequests: any[] = [];
+  propertyId: string = '';
 
   property: any = {
     propertyName: '',
@@ -72,6 +73,7 @@ export class SellerDashboardComponent {
     if (confirm("Are you sure you want to delete this property?")) {
       this.propertyService.deleteProperty(propertyId).subscribe({
         next: () => {
+          this.propertyId = propertyId;
           alert("Property deleted successfully!");
           this.getSellerProperties();
         },
@@ -83,13 +85,14 @@ export class SellerDashboardComponent {
   }
 
   getBuyRequests(){
-    this.propertyService.getSellerBuyRequests(this.user._id).subscribe({
+    this.propertyService.getSellerBuyRequests(this.user.id).subscribe({
       next: (requests:any) =>{
         this.buyRequests = requests;
+        // console.info(this.user.id);
         console.info("Buy Requests are:",this.buyRequests);
       },
       error: (error) =>{
-        // console.info(this.user._id);
+        // console.info(this.user.id);
         console.info("Error in fetching requests:",error);
       }
     })

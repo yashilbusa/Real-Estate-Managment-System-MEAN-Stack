@@ -24,6 +24,7 @@ export const buyPropertyRequest = async (req,res) =>{
 export const getSellerBuyRequests = async (req,res) => {
     try {
         const { sellerId } = req.params.sellerId;
+        // console.info(sellerId);
 
         const buyRequest = await ApproveRequest.find({
             sellerId: sellerId
