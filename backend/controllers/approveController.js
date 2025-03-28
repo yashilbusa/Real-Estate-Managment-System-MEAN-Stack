@@ -24,16 +24,12 @@ export const buyPropertyRequest = async (req,res) =>{
 export const getSellerBuyRequests = async (req,res) => {
     try {
         // const {sellerId}  = req.params;
-        // // const sellerId = "67e24ace82a18d9807132b4f";
-
         // console.info(sellerId);
 
-        const buyRequest = await ApproveRequest.find();
-
         // const buyRequest = await ApproveRequest.find({ sellerId: sellerId});
-
-        res.json(buyRequest);
         
+        const buyRequest = await ApproveRequest.find();
+        res.json(buyRequest);
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });  
     }
@@ -53,5 +49,4 @@ export const updateReqStatus = async (req,res) => {
    } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });  
    }
-    
 }
